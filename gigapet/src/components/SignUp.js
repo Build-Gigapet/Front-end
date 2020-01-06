@@ -20,7 +20,7 @@ class SignUp extends React.Component {
     };
     signup = e => {
         e.preventDefault();
-        axiosWithAuth.post("https://jsonplaceholder.typicode.com/posts", this.state.credentials)
+        axiosWithAuth().post("http://dummy.restapiexample.com/api/v1/create", this.state.credentials)
             .then(res => {
                 localStorage.setItem("token", res.data.payload);
                 this.props.history.push("protected")
@@ -31,18 +31,21 @@ class SignUp extends React.Component {
     render() {
         return (
             <div className="form">
-                <h1>Welcome to Pet</h1>
+                <h1>Welcome to GigaPet</h1>
                 <Form onSubmit={this.signup}>
                     <FormGroup>
                         <Label for="username">Username</Label>
-                        <Input type="text"
+                        <Input
+                            style={{ width: 500 }}
+                            type="text"
                             className="username"
                             name="username"
                             value={this.state.credentials.username} onChange={this.handleChange} />
                     </FormGroup>
                     <FormGroup>
                         <Label for="password">Password</Label>
-                        <Input type="password"
+                        <Input style={{ width: 500 }}
+                            type="password"
                             name="password"
                             value={this.state.credentials.password}
                             onChange={this.handleChange} />
