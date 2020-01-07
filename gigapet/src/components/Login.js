@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axiosWithAuth";
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const Login = props => {
   const [login, setLogin] = useState({
@@ -27,7 +28,37 @@ const Login = props => {
       });
   };
 
-  return <div>Login Form</div>;
+  return (
+    <div>
+      <form>
+        <FormGroup>
+          <Label for="username">Email</Label>
+          <Input
+            style={{ width: 500 }}
+            type="text"
+            className="email"
+            name="email"
+            placeholder="email"
+            value={login.email}
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <FormGroup>
+          <Label for="password">Password</Label>
+          <Input
+            style={{ width: 500 }}
+            type="password"
+            name="password"
+            placeholder="password"
+            value={login.password}
+            onChange={handleChange}
+          />
+        </FormGroup>
+        <Button color="success">SignUp</Button>
+        {login.isFetching && "Please Wait"}
+      </form>
+    </div>
+  );
 };
 
 export default Login;
