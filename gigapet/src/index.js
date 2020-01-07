@@ -7,16 +7,18 @@ import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 
-import PrivateRoute from "./components/PrivateRoute";
-import SignUp from "./pages/SignUp";
-import UpdateForm from "./components/UpdateForm";
+import PrivateRoute from './components/PrivateRoute';
+import SignUp from './pages/SignUp';
+import Login from './pages/Login';
+import UpdateForm from './components/UpdateForm';
 
 const routing = (
     <Router>
       <div>
           {/* TODO: Replace APP with HOME/Marketing */}
-        {/* <Route exact path="/" component={App} /> */}
-        <Route exact path="/sign-up" component={SignUp} />
+        {/* <Route exact path='/' component={App} /> */}
+        <Route exact path='/sign-up' component={SignUp} />
+        <Route exact path='/login' component={Login} />
       </div>
     </Router>
   );
