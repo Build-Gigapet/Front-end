@@ -1,10 +1,56 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axiosWithAuth";
-const updateForm = () => {
+const initialUser = {
+    user: "",
+    id: ""
+};
+const UpdateForm = ({ users, updateUsers, props }) => {
+    const [editing, setEditing] = useState(false);
+    const [userToEdit, setUserToEdit] = useState(initialUser);
+    console.log(users);
+
+
+
+    const saveUser = (e) => {
+        e.preventDefault();
+        const addUser = this.props.addUser;
+        addUser(this.state.user);
+    }
+
+    const deleteUser = id => {
+
+        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
+            .then(res => {
+                console.log(res.data)
+                updateUsers(users.filter(user => {
+                    return user.id !== id;
+                }))
+                props.history.push('/protected');
+            })
+            .catch(err => console.log(err));
+    };
+
+    if (!users) {
+        return <div>Loading user info...</div>
+    }
+
     return (
         <div>
+            <p>users</p>
+            <ul>
+                {users.map(user => (
+                    <li key={user.user}><span className="delete" onClick={() => deleteUser(user.id)}>Delete</span></li>
+                ))}
+            </ul>
             <form>
-                <label>
+                <h3>{users.name}</h3>
+                <h3>{users.password}</h3>
+                <p>Let's edit</p>
+                <input type="text" name="name" placeholder="name" />
+                <input type="text" name="password" placeholder="password" />
+                <button className="md-button" onClick={deleteUser}>DELETE</button>
+
+                {/* <label>
                     Pick your Food Category
                 <select>
                         <option value="fruit">fruit</option>
@@ -17,14 +63,14 @@ const updateForm = () => {
                     </select>
                 </label>
                 <input type="number" name="score" placeholder="score" />
-                <input type="text" name="entry" placeholder="food entry" />
+                <input type="text" name="entry" placeholder="food entry" /> */}
                 <input type="submit" value="submit" />
             </form>
         </div>
 
     )
 }
-export default updateForm;
+export default UpdateForm;
 // const initialMeal ={
 //     meal:"",
 //     score:"",
