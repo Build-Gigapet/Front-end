@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Router, Route, Link, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
-import SignUp from "./components/SignUp";
+import SignUp from "./pages/SignUp";
 import UpdateForm from "./components/UpdateForm";
 // import Parent from "./components/Parent";
 import { createBrowserHistory } from "history";
-import './App.css';
+// import './App.css';
 
 const history = createBrowserHistory();
 function App() {
