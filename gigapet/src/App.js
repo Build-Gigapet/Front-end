@@ -29,7 +29,7 @@ function App(props) {
           </ul>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
-          <Route path="/signup" component="{Signup}" />
+          <Route path="/signup" component={Signup} />
           <PrivateRoute path="/admin" component={Admin} />
         </div>
       </Router>
