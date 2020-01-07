@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+// import './index.css';
+import './pages/styles/global.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-ReactDOM.render(<App />, document.getElementById('root'));
+import * as serviceWorker from './serviceWorker';
+import { Route, BrowserRouter as Router } from 'react-router-dom';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+
+import PrivateRoute from "./components/PrivateRoute";
+import SignUp from "./pages/SignUp";
+import UpdateForm from "./components/UpdateForm";
+
+const routing = (
+    <Router>
+      <div>
+          {/* TODO: Replace APP with HOME/Marketing */}
+        {/* <Route exact path="/" component={App} /> */}
+        <Route exact path="/sign-up" component={SignUp} />
+      </div>
+    </Router>
+  );
+
+ReactDOM.render(routing, document.getElementById('root'));
+
 serviceWorker.unregister();
