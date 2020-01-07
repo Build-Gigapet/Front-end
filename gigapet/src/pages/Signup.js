@@ -6,6 +6,15 @@ function Signup() {
   return (
     <Form>
       <FormGroup>
+        <Label for="userName">Username</Label>
+        <Input
+          type="text"
+          name="name"
+          id="userName"
+          placeholder="Enter a Valid Username"
+        />
+      </FormGroup>
+      <FormGroup>
         <Label for="userEmail">Email</Label>
         <Input
           type="email"

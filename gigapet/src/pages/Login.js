@@ -2,15 +2,7 @@ import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import Axios from "axios";
 import { useAuth } from "../context/auth";
-import {
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  FormFeedback,
-  FormText,
-  Button,
-} from "reactstrap";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 function Login() {
   const [isLoggedIn, setLoggedIn] = useState(false);
@@ -21,45 +13,59 @@ function Login() {
 
   function postLogin() {
     Axios.post("https://build-gigapet.herokuapp.com/api/auth/login/", {
-      name,
+      userName,
       password,
     }).then(result => {
       if (result.status === 200) {
-        setAuthTokens(result.data);
+        setAuthTokens(result.token);
+        setLoggedIn(true);
+      } else {
+        setIsError(true);
       }
     });
   }
+
+  if (isLoggedIn) {
+    return <Redirect to="/" />;
+  }
+
   return (
-    <Form>
-      <FormGroup>
-        <Label for="name">Username</Label>
-        <Input
-          type="text"
-          name="name"
-          id="name"
-          placeholder="Enter a Valid Username"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="email">Email</Label>
-        <Input
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Enter a Valid Email Address"
-        />
-      </FormGroup>
-      <FormGroup>
-        <Label for="password">Password</Label>
-        <Input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Enter a Valid Password"
-        />
-      </FormGroup>
-      <Button>Submit</Button>
-    </Form>
+    <div>
+      <Form>
+        <FormGroup>
+          <Label for="userName">Username</Label>
+          <Input
+            type="text"
+            value={userName}
+            onChange={e => {
+              setUserName(e.target.value);
+            }}
+            name="name"
+            id="userName"
+            placeholder="Enter Your Username"
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <Label for="password">Password</Label>
+          <Input
+            type="password"
+            value={password}
+            onChange={e => {
+              setPassword(e.target.value);
+            }}
+            name="password"
+            id="password"
+            placeholder="Enter Your Password"
+          />
+        </FormGroup>
+        <Button onClick={postLogin}>Submit</Button>
+      </Form>
+
+      <Link to="/signup">Need an account?</Link>
+
+      {isError && "The username or password provided were incorrect!"}
+    </div>
   );
 }
 
