@@ -11,17 +11,17 @@ const Login = props => {
   const handleChange = e => {
     setLogin({
       ...login,
-      [e.target.email]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    axiosWithAuth
+    axiosWithAuth()
       .post("https://build-gigapet.herokuapp.com/api/auth/login", login)
       .then(result => {
         localStorage.setItem("token", result.data.token);
-        this.props.history.push("/dashboard");
+        this.props.history.push("/protected");
       })
       .catch(err => {
         console.log(err);
@@ -54,7 +54,7 @@ const Login = props => {
             onChange={handleChange}
           />
         </FormGroup>
-        <Button color="success">SignUp</Button>
+        <Button color="success">Login</Button>
         {login.isFetching && "Please Wait"}
       </form>
     </div>

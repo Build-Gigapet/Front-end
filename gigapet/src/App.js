@@ -7,6 +7,7 @@ import UpdateForm from "./components/UpdateForm";
 // import Parent from "./components/Parent";
 import { createBrowserHistory } from "history";
 import "./App.css";
+import Dashboard from "./components/Dashboard";
 
 const history = createBrowserHistory();
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <li>
             <Link to="/signup">Sign Up</Link>
           </li>
+          <Link to="/protected">Dashboard</Link>
           <li>
             <Link to="/auth/:id">Update Form</Link>
           </li>
@@ -37,21 +39,24 @@ function App() {
           </li>
           {/* <li><Link to="protected">Parent</Link></li> */}
         </ul>
-        <Route exact path="/" component={SignUp} />
-        <Route
-          path={`/auth/:id`}
-          render={props => {
-            return (
-              <UpdateForm
-                {...props}
-                history={history}
-                updateUsers={updateUsers}
-              />
-            );
-          }}
-        />
-        <Route path={"/login"} component={Login} />
-
+        <Switch>
+          <PrivateRoute path="/protected" component={Dashboard} />
+          <Route exact path="/protected" component={Dashboard} />
+          <Route exact path="/" component={SignUp} />
+          <Route
+            path={`/auth/:id`}
+            render={props => {
+              return (
+                <UpdateForm
+                  {...props}
+                  history={history}
+                  updateUsers={updateUsers}
+                />
+              );
+            }}
+          />
+          <Route path={"/login"} component={Login} />
+        </Switch>
         {/* <Switch>
           <PrivateRoute path="/protected" component={Parent} />
           <Route exact path="/protected" component={Parent} />
