@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import SignUp from "./pages/SignUp";
+import Login from "./components/Login";
 import UpdateForm from "./components/UpdateForm";
 // import Parent from "./components/Parent";
 import { createBrowserHistory } from "history";
+import Header from "./components/Header";
 // import './App.css';
 
 const history = createBrowserHistory();
@@ -24,6 +26,7 @@ function App() {
   return (
     <Router history={history}>
       <div className="App">
+        <Header />
         <ul>
           <li>
             <Link to="/signup">Sign Up</Link>

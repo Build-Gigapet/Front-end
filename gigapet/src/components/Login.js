@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import Header from "../components/Header";
 
 const Login = props => {
   const [login, setLogin] = useState({
@@ -30,7 +31,8 @@ const Login = props => {
 
   return (
     <div>
-      <form>
+      <Header />
+      <Form>
         <FormGroup>
           <Label for="username">Email</Label>
           <Input
@@ -54,9 +56,11 @@ const Login = props => {
             onChange={handleChange}
           />
         </FormGroup>
-        <Button color="success">SignUp</Button>
+        <Button color="success" onSubmit={onSubmit}>
+          SignUp
+        </Button>
         {login.isFetching && "Please Wait"}
-      </form>
+      </Form>
     </div>
   );
 };
