@@ -24,7 +24,7 @@ function Signup() {
         .then(result => {
           console.log(result);
           if (result.status === 201) {
-            setAuthTokens(result.token);
+            setAuthTokens(result.data.token);
             setisRegistered(true);
           } else {
             setIsError(true);
