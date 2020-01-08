@@ -6,6 +6,7 @@ import UpdateForm from "./UpdateForm";
 
 const Dashboard = props => {
     const [children, setChildren] = useState([]);
+
     useEffect(() => {
         axiosWithAuth()
             .get("https://build-gigapet.herokuapp.com/api/kid")
@@ -19,6 +20,10 @@ const Dashboard = props => {
     const addKid = (kid) => {
         console(kid)
         setChildren({ children: [...children, kid] })
+    }
+    const addFood = (food) => {
+        console(food)
+        setChildren({ food })
     }
     return (
         <div className="dash-board">

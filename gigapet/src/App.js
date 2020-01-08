@@ -1,14 +1,12 @@
 
 import Login from "./components/Login";
-// import Parent from "./components/Parent";
-
 import Dashboard from "./components/Dashboard";
 import React, { useState } from 'react';
 import { Router, Route, Link, Switch } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute';
 import SignUp from './pages/SignUp';
 import UpdateForm from './components/UpdateForm';
-// import Parent from './components/Parent';
+import Parent from './components/Parent';
 import { createBrowserHistory } from 'history';
 // import './App.css';
 
@@ -40,12 +38,15 @@ function App() {
           <li>
             <Link to='/login'>Log In</Link>
           </li>
-          {/* <li><Link to='protected'>Parent</Link></li> */}
+          <li><Link to='/protected'>Parent</Link></li>
         </ul>
         <Switch>
           <PrivateRoute path="/protected" component={Dashboard} />
+          <PrivateRoute path='/protected' component={Parent} />
+          <Route exact path='/protected' component={Parent} />
+          <Route path='/' component={SignUp} />
           <Route exact path="/protected" component={Dashboard} />
-          <Route exact path="/" component={SignUp} />
+          {/* <Route exact path="/" component={SignUp} /> */}
           <Route
             path={`/auth/:id`}
             render={props => {
@@ -60,17 +61,15 @@ function App() {
           />
           <Route path={'/login'} component={Login} />
 
-          <Route path={"/login"} component={Login} />
+
         </Switch>
-        <Route exact path='/' component={SignUp} />
 
 
-        {/* <Switch>
-          <PrivateRoute path='/protected' component={Parent} />
-          <Route exact path='/protected' component={Parent} />
-          <Route path='/signup' component={SignUp} />
 
-        </Switch> */}
+
+
+
+
       </div>
     </Router>
   );
