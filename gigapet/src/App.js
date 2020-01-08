@@ -1,33 +1,35 @@
-
-import Login from "./pages/Login";
-import Dashboard from "./components/Dashboard";
-import React from 'react';
-import { Router, Route, Link, Switch } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
-import SignUp from './pages/SignUp';
-import UpdateForm from './components/UpdateForm';
-import Parent from './components/Parent';
-import User from "./components/User";
-import { createBrowserHistory } from 'history';
+import React, { useState } from "react";
+import { Router, Route, Link, Switch } from "react-router-dom";
+import PrivateRoute from "./components/PrivateRoute";
+import SignUp from "./pages/SignUp";
+// import Login from "./components/Login";
+import UpdateForm from "./components/UpdateForm";
+// import Parent from "./components/Parent";
+import { createBrowserHistory } from "history";
+import Header from "./components/Header";
 // import './App.css';
 
 const history = createBrowserHistory();
 function App() {
-
+  const [saveList, setSaveList] = useState([]);
+  const [users, setUsers] = useState([]);
+  const addToSaveList = user => {
+    setSaveList([...saveList, user]);
+  };
+  const updateUsers = user => {
+    console.log(user);
+    setUsers({ users: [users, user] });
+  };
   // const removeItem = id =>{
   //   setChildren(children.filter(item =>item.id !== id))
   // }
   return (
     <Router history={history}>
-      <div className='App'>
-
-
-        <ul>
+      <div className="App">
+        <Header />
+        {/* <ul>
           <li>
-            <Link to='/signup'>Sign Up</Link>
-          </li>
-          <li>
-            <Link to='/api/auth/users'>User</Link>
+            <Link to='/'>Sign Up</Link>
           </li>
           <Link to="/dashboard">Dashboard</Link>
           <li>
@@ -36,39 +38,28 @@ function App() {
           <li>
             <Link to='/login'>Log In</Link>
           </li>
-          <li><Link to='/parent'>Parent</Link></li>
-        </ul>
-        <Switch>
-          {/* <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path='/protected' component={Parent} /> */}
-          <Route exact path='/protected' component={Parent} />
-          <Route path='/signup' component={SignUp} />
-          {/* <Route path='/auth/' component={User} /> */}
-          <Route exact path="/dashboard" component={Dashboard} />
-          {/* <Route exact path="/" component={SignUp} /> */}
-          <Route
-            path={`/auth/:id`}
-            render={props => {
-              return (
-                <UpdateForm
-                  {...props}
-                  history={history}
+          {/* <li><Link to="protected">Parent</Link></li>
+        </ul> */}
+        {/* <Route exact path="/" component={Login} /> */}
+        <Route path="/register" component={SignUp} />
+        <Route
+          path={`/auth/:id`}
+          render={props => {
+            return (
+              <UpdateForm
+                {...props}
+                history={history}
+                updateUsers={updateUsers}
+              />
+            );
+          }}
+        />
+        {/* <Route path={"/login"} component={Login} /> */}
+        {/* <Switch>
+          <PrivateRoute path="/protected" component={Parent} />
+          <Route exact path="/protected" component={Parent} />
 
-                />
-              );
-            }}
-          />
-          <Route path={'/login'} component={Login} />
-
-
-        </Switch>
-
-
-
-
-
-
-
+        </Switch> */}
       </div>
     </Router>
   );

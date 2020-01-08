@@ -1,55 +1,32 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 // import './index.css';
-import './pages/styles/global.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import * as serviceWorker from './serviceWorker';
-import { Link, Route, BrowserRouter as Router } from 'react-router-dom';
+import "./pages/styles/global.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import * as serviceWorker from "./serviceWorker";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+// import App from "./App";
 
-
-import PrivateRoute from './components/PrivateRoute';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
-import UpdateForm from './components/UpdateForm';
-import App from "./App";
+import PrivateRoute from "./components/PrivateRoute";
+import SignUp from "./pages/SignUp";
+import Login from "./pages/Login";
+import UpdateForm from "./components/UpdateForm";
 import Dashboard from "./components/Dashboard";
-import Parent from './components/Parent';
+import Header from "./components/Header";
+
 const routing = (
   <Router>
     <div>
-      <ul>
-        <li>
-          <Link to='/signup'>Sign Up</Link>
-        </li>
-        <li>
-          <Link to='/auth/users/'>User</Link>
-        </li>
-        <Link to="/protected">Dashboard</Link>
-        <li>
-          <Link to='/auth/:id'>Update Form</Link>
-        </li>
-        <li>
-          <Link to='/login'>Log In</Link>
-        </li>
-        <li><Link to='/parent'>Parent</Link></li>
-      </ul>
-
-      {/*  TODO: Replace APP with HOME/Marketing 
-<Route exact path='/' component={App} /> */ }
-      <Route exact path='/sign-up' component={SignUp} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/parent' component={Parent} />
-      <PrivateRoute exact path="/dashboard" component={Dashboard} />
-      <Route exact path='/auth/:id' component={UpdateForm} />
-
-
-
-      />
-
+      <Header />
+      {/* TODO: Replace APP with HOME/Marketing */}
+      {/* <Route exact path="/" component={App} /> */}
+      <Route path="/sign-up" component={SignUp} />
+      <Route path="/login" component={Login} />
+      <Route path="/dashboard" component={Dashboard} />
     </div>
   </Router>
 );
 
-ReactDOM.render(routing, document.getElementById('root'));
+ReactDOM.render(routing, document.getElementById("root"));
 
 serviceWorker.unregister();
