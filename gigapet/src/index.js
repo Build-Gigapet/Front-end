@@ -15,13 +15,13 @@ import App from "./App";
 // const routing = (
 //   <Router>
 //     <div>
-{/* TODO: Replace APP with HOME/Marketing */ }
-{/* <Route exact path='/' component={App} /> */ }
-{/* <Route exact path='/sign-up' component={SignUp} />
-      <Route exact path='/login' component={Login} />
-    </div>
-  </Router>
-); */}
+// TODO: Replace APP with HOME/Marketing */ }
+// <Route exact path='/' component={App} /> */ }
+//  <Route exact path='/sign-up' component={SignUp} />
+//       <Route exact path='/login' component={Login} />
+//     </div>
+//   </Router>
+// ); 
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

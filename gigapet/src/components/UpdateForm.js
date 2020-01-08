@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 const initialUser = {
-    user: "",
-    id: ""
+
+    id: new Date(),
+    name: "",
+    email: ""
 };
-const UpdateForm = ({ users, updateUsers, props }) => {
+const UpdateForm = props => {
 
     const [editing, setEditing] = useState(false);
     const [userToEdit, setUserToEdit] = useState(initialUser);
-    console.log(users);
-
-    const saveUser = (e) => {
-        e.preventDefault();
-        const addUser = this.props.addUser;
-        addUser(this.state.user);
+    const [users, setUsers] = useState([]);
+    const addUser = user => {
+        setUsers([...users, user]);
+    };
+    const getUser = () => {
+        axiosWithAuth().get('/api/auth/users')
+            .then(res => {
+                console.log(res.data)
+                setUsers({ users: res.data })
+            })
+            .catch(err => console.log(err));
     }
+
+    console.log(users);
 
     const editUser = user => {
         setEditing(true);
@@ -26,7 +35,7 @@ const UpdateForm = ({ users, updateUsers, props }) => {
         axiosWithAuth()
             .put('https://build-gigapet.herokuapp.com/api/auth/:id', userToEdit)
             .then(res => {
-                updateUsers(users.map(user => {
+                setUsers(users.map(user => {
                     if (userToEdit.id === user.id) {
                         return user = res.data
                     } else {
@@ -44,7 +53,7 @@ const UpdateForm = ({ users, updateUsers, props }) => {
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
             .then(res => {
                 console.log(res.data)
-                updateUsers(users.filter(user => {
+                setUsers(users.filter(user => {
                     return user.id !== id;
                 }))
                 props.history.push('/protected');
@@ -52,9 +61,7 @@ const UpdateForm = ({ users, updateUsers, props }) => {
             .catch(err => console.log(err));
     };
 
-    if (!users) {
-        return <div>Loading user info...</div>
-    }
+
 
     return (
         <div>
@@ -66,10 +73,11 @@ const UpdateForm = ({ users, updateUsers, props }) => {
             </ul>
             <form>
                 <h3>{users.name}</h3>
-                <h3>{users.password}</h3>
+                <h3>{users.email}</h3>
                 <p>Let's edit</p>
                 <input type="text" name="name" placeholder="name" />
-                <input type="text" name="password" placeholder="password" />
+                <input type="email" name="email" placeholder="email" />
+                <button onClick={editUser}>EDIT</button>
                 <button className="md-button" onClick={deleteUser}>DELETE</button>
 
                 {/* <label>

@@ -23,9 +23,8 @@ const SignUp = props => {
         axiosWithAuth().post('https://build-gigapet.herokuapp.com/api/auth/register', signup)
             .then(res => {
 
-                localStorage.setItem('token', res.data.payload);
-                props.history.push('/login');
-
+                localStorage.setItem('token', res.data.token);
+                window.location = '/login';
             })
             .catch(err => console.log(err))
     };

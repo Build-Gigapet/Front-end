@@ -1,9 +1,5 @@
 import React from 'react';
-import UpdateForm from "./UpdateForm";
 import axiosWithAuth from '../axiosWithAuth';
-
-
-
 class Parent extends React.Component {
 
     constructor(props) {
@@ -54,7 +50,7 @@ class Parent extends React.Component {
         return (
             <div className="parent-form">
 
-                <UpdateForm props={this.state.kid} />
+
 
                 <form onSubmit={this.handleSubmit} method="get">
                     <input type="text" name="kid_name" placeholder="kid_name" value={this.state.kid_name} onChange={this.handleChange} />
