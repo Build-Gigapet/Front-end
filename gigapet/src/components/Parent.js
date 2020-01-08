@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import axios from "axios";
+import React from 'react';
 import UpdateForm from "./UpdateForm";
 import axiosWithAuth from '../axiosWithAuth';
 
@@ -17,7 +16,7 @@ class Parent extends React.Component {
                 pet_name: "",
                 score: "",
                 height: "",
-                fav_food: " ",
+                fav_food: "",
                 weight: "",
             }
         };
@@ -58,13 +57,13 @@ class Parent extends React.Component {
                 <UpdateForm props={this.state.kid} />
 
                 <form onSubmit={this.handleSubmit} method="get">
-                    <input type="text" name="kid_name" placeholder="kid_name" value={this.state.kid.kid_name} onChange={this.handleChange} />
-                    <input type="number" name="age" placeholder="age" value={this.state.kid.age} onChange={this.handleChange} />
-                    <input type="text" name="pet_name" placeholder="pet name" value={this.state.kid.pet_name} onChange={this.handleChange} />
-                    <input type="number " name="score" placeholder="Score" value={this.state.kid.score} onChange={this.handleChange} />
-                    <input type="number" name="height" placeholder="height" value={this.state.kid.height} onChange={this.handleChange} />
-                    <input type="text" name="fav_food" placeholder="favfood" value={this.state.kid.fav_food} onChange={this.handleChange} />
-                    <input type="text" name="weight" placeholder="weight" value={this.state.kid.weight} onChange={this.handleChange} />
+                    <input type="text" name="kid_name" placeholder="kid_name" value={this.state.kid_name} onChange={this.handleChange} />
+                    <input type="number" name="age" placeholder="age" value={this.state.age} onChange={this.handleChange} />
+                    <input type="text" name="pet_name" placeholder="pet name" value={this.state.pet_name} onChange={this.handleChange} />
+                    <input type="number" name="score" placeholder="Score" value={this.state.score} onChange={this.handleChange} />
+                    <input type="number" name="height" placeholder="height" value={this.state.height} onChange={this.handleChange} />
+                    <input type="text" name="fav_food" placeholder="favorite food" value={this.state.fav_food} onChange={this.handleChange} />
+                    <input type="text" name="weight" placeholder="weight" value={this.state.weight} onChange={this.handleChange} />
                     <button type="submit" formMethod="post">Add Child </button>
 
                 </form>

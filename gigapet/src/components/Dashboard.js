@@ -9,14 +9,14 @@ const Dashboard = props => {
 
     useEffect(() => {
         axiosWithAuth()
-            .get('/kid')
+            .get('https://build-gigapet.herokuapp.com/api/kid')
             .then(response => {
                 setKids({ kids: response.data });
             })
             .catch(error => {
                 console.error("Server Error", error);
             })
-    }, []);
+    }, [kids]);
 
 
     return (
@@ -39,7 +39,7 @@ const Dashboard = props => {
                         <div key={kid.id} kid={kid}>
                             <div className="name">Child Name:<em>{kid.kid_name}</em></div>
 
-                            <p className="age">Child Age:  {kid.age}</p>
+                            <h2 className="age">Child Age:  {kid.age}</h2>
                             <p className="pet">Pet Name: {kid.pet_name}</p>
                             <p className="score">Score:<strong>{kid.score}</strong></p>
                             <p className="height">Height:  {kid.height}</p>
