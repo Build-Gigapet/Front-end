@@ -5,17 +5,39 @@ const initialUser = {
     id: ""
 };
 const UpdateForm = ({ users, updateUsers, props }) => {
+    // const [food, setFood] = useState([]);
     const [editing, setEditing] = useState(false);
     const [userToEdit, setUserToEdit] = useState(initialUser);
     console.log(users);
-
-
 
     const saveUser = (e) => {
         e.preventDefault();
         const addUser = this.props.addUser;
         addUser(this.state.user);
     }
+
+    const editUser = user => {
+        setEditing(true);
+        setUserToEdit(user);
+    }
+
+    const saveEdit = e => {
+        e.preventDefault();
+        axiosWithAuth()
+            .put('https://build-gigapet.herokuapp.com/api/auth/:id', userToEdit)
+            .then(res => {
+                updateUsers(users.map(user => {
+                    if (userToEdit.id === user.id) {
+                        return user = res.data
+                    } else {
+                        return user
+                    }
+
+                }))
+                props.history.push("/protected");
+            })
+            .catch(err => console.log(err.response));
+    };
 
     const deleteUser = id => {
 
