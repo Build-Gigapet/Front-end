@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
 import SignUp from "./pages/SignUp";
-import Login from "./components/Login";
+// import Login from "./components/Login";
 import UpdateForm from "./components/UpdateForm";
 // import Parent from "./components/Parent";
 import { createBrowserHistory } from "history";
@@ -39,7 +39,8 @@ function App() {
           </li>
           {/* <li><Link to="protected">Parent</Link></li>
         </ul> */}
-        <Route exact path="/" component={Login} />
+        {/* <Route exact path="/" component={Login} /> */}
+        <Route path="/register" component={SignUp} />
         <Route
           path={`/auth/:id`}
           render={props => {
@@ -52,11 +53,11 @@ function App() {
             );
           }}
         />
-        <Route path={"/login"} component={Login} />
+        {/* <Route path={"/login"} component={Login} /> */}
         {/* <Switch>
           <PrivateRoute path="/protected" component={Parent} />
           <Route exact path="/protected" component={Parent} />
-          <Route path="/signup" component={SignUp} />
+
 
         </Switch> */}
       </div>

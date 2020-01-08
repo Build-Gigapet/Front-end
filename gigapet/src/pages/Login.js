@@ -1,27 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const Login = props => {
   const [login, setLogin] = useState({
-    email: "",
+    name: "",
     password: "",
+  });
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    // document.title = `You clicked ${count} times`;
+    if (localStorage.getItem("ID") !== -1) {
+      window.location = "/dashboard";
+    }
   });
 
   const handleChange = e => {
     setLogin({
       ...login,
-      [e.target.email]: e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
 
   const onSubmit = e => {
     e.preventDefault();
-    axiosWithAuth
+    console.log(";askldfjasdkl;sdjfsdjfklsd");
+    axiosWithAuth()
       .post("https://build-gigapet.herokuapp.com/api/auth/login", login)
       .then(result => {
+        console.log(result);
+        localStorage.setItem("ID", result.data.id);
+        localStorage.setItem(
+          "name",
+          document.getElementById("username-input").value,
+        );
         localStorage.setItem("token", result.data.token);
-        this.props.history.push("/dashboard");
+        window.location = "/dashboard";
       })
       .catch(err => {
         console.log(err);
@@ -40,16 +55,17 @@ const Login = props => {
       }}
     >
       <div>
-        <Form>
+        <Form onSubmit={onSubmit}>
           <FormGroup>
-            <Label for="username">Email</Label>
+            <Label for="name">Name</Label>
             <Input
               style={{ width: 500 }}
+              id="username-input"
               type="text"
-              className="email"
-              name="email"
-              placeholder="email"
-              value={login.email}
+              className="name"
+              name="name"
+              placeholder="name"
+              value={login.name}
               onChange={handleChange}
             />
           </FormGroup>
@@ -64,9 +80,7 @@ const Login = props => {
               onChange={handleChange}
             />
           </FormGroup>
-          <Button color="success" onSubmit={onSubmit}>
-            Log In
-          </Button>
+          <Button color="success">Log In</Button>
           {login.isFetching && "Please Wait"}
         </Form>
       </div>

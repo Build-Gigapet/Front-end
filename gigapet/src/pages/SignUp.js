@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
@@ -7,6 +7,14 @@ const SignUp = props => {
     name: "",
     email: "",
     password: "",
+  });
+
+  useEffect(() => {
+    // Update the document title using the browser API
+    // document.title = `You clicked ${count} times`;
+    if (localStorage.getItem("ID") !== -1) {
+      window.location = "/dashboard";
+    }
   });
 
   const handleChange = e => {
@@ -20,8 +28,10 @@ const SignUp = props => {
     axiosWithAuth()
       .post("https://build-gigapet.herokuapp.com/api/auth/register", signup)
       .then(res => {
+        console.log(res);
         localStorage.setItem("token", res.data.token);
-        this.props.history.push("/login");
+        // this.props.history.push("/login");
+        window.location = "/login";
       })
       .catch(err => console.log(err));
   };
