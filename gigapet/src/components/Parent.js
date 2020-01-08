@@ -37,7 +37,7 @@ class Parent extends React.Component {
         event.preventDefault();
         console.log(this.state)
         axiosWithAuth()
-            .post(`https://build-gigapet.herokuapp.com/api/kid/1`, this.state)
+            .post(`https://build-gigapet.herokuapp.com/api/kid/2`, this.state)
             .then(response => {
                 console.log(response);
                 this.setState(response.data)

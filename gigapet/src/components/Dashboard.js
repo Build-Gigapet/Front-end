@@ -9,7 +9,7 @@ const Dashboard = props => {
 
     useEffect(() => {
         axios
-            .get(`/kid/`)
+            .get(`https://build-gigapet.herokuapp.com/api/kid`)
             .then(response => {
                 console.log(response.data)
                 setKids({ kids: response.data });
