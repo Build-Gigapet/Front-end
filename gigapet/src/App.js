@@ -2,13 +2,13 @@
 import Login from "./pages/Login";
 import Dashboard from "./components/Dashboard";
 import React from 'react';
-import { Router, Route, Link, Switch } from 'react-router-dom';
+
 import PrivateRoute from './components/PrivateRoute';
 import SignUp from './pages/SignUp';
 import UpdateForm from './components/UpdateForm';
 import Parent from './components/Parent';
 import Register from "./components/Register";
-import { createBrowserHistory } from 'history';
+
 // import './App.css';
 
 const history = createBrowserHistory();
@@ -18,7 +18,7 @@ function App() {
   //   setChildren(children.filter(item =>item.id !== id))
   // }
   return (
-    <Router history={history}>
+    <Router>
       <div className='App'>
 
 

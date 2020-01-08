@@ -4,7 +4,7 @@ const axiosWithAuth = () => {
     return axios.create({
         baseUrl: 'https://build-gigapet.herokuapp.com',
         headers: {
-            'Authorization': 'token',
+            'Authorization': token,
             'Content-Type': 'application/json'
         }
     })

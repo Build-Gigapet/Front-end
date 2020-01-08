@@ -1,23 +1,28 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
-import axios from "axios";
-import UpdateForm from "./UpdateForm";
+const initialUser = {
 
+    id: new Date(),
+    name: "",
+    email: ""
+};
 const Dashboard = props => {
-    const [kids, setKids] = useState([]);
+    const [users, setUsers] = useState(initialUser);
 
-    useEffect(() => {
-        axios
-            .get(`https://build-gigapet.herokuapp.com/api/kid`)
-            .then(response => {
-                console.log(response.data)
-                setKids({ kids: response.data });
-            })
-            .catch(error => {
-                console.error("Server Error", error);
-            })
-    }, []);
+
+
+    axiosWithAuth().get('https://build-gigapet.herokuapp.com/api/auth/:id')
+        .then(res => {
+            console.log(res.data)
+            setUsers({ users: res.data })
+        })
+        .catch(err => console.log(err))
+
+    
+    const addUser = initalUser => {
+        setUsers([...users, initialUser]);
+    };
 
 
     return (
@@ -31,36 +36,44 @@ const Dashboard = props => {
                     <li><Link to="/login">Log Out</Link></li>
                 </ul>
             </nav>
+            <main>
 
 
-            <div>
-                {kids.map(kid => {
-                    return (
+                <div>
+                    <p>users</p>
+                    <ul>
+                        {users.map(user => (
+                            <li key={user.user}><span className="delete" onClick={() => deleteUser(user.id)}>Delete</span></li>
+                        ))}
+                    </ul>
+   
+                    <form>
+                        <h3>{users.name}</h3>
+                        <h3>{users.email}</h3>
+                        <p>Let's edit</p>
+                        <input type="text" name="name" placeholder="name" />
+                        <input type="email" name="email" placeholder="email" />
+                        <button onClick={editUser}>EDIT</button>
+                        <button className="md-button" onClick={deleteUser}>DELETE</button>
 
-                        <div key={kid.id} kid={kid}>
-                            <h2 className="name">Child Name:<em>{kid.kid_name}</em></h2>
+                    </form>
+                    </div>
+                </main>
 
-                            <h2 className="age">Child Age:  {kid.age}</h2>
-                            <h3 className="pet">Pet Name: {kid.pet_name}</h3>
-                            <h3 className="score">Score:<strong>{kid.score}</strong></h3>
-                            <h3 className="height">Height:  {kid.height}</h3>
-                            <h3 className="fav_food"> Favorite Food:  {kid.fav_food}</h3>
-                            <h3 className="weight">Weight: {kid.weight}</h3>
-
-
-
-                        </div>
-                    )
-                })}
-
-            </div>
-
-
-
+                }
+            
+                   
+        
+      
         </div>
 
 
 
-    )
-}
+
+
+
+
+
+            )
+        }
 export default Dashboard;
