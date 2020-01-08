@@ -16,3 +16,22 @@
 .header img {
   max-width: 5%;
 }
+
+.navLinks {
+  display: flex;
+  justify-content: space-evenly;
+  text-decoration: none;
+}
+
+.navlinks a {
+  text-decoration: none;
+}
+/* nav {
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+} */
+
+.hidden {
+  display: none;
+}

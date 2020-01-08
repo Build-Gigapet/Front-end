@@ -9,11 +9,12 @@ const Header = function() {
         <h1>GigaPet</h1>
         <img src={require("../pages/styles/images/gigapet.png")} />
       </div>
-      <nav>
+      <nav className="navLinks">
         <Link to="/">Home</Link>
         <Link to="/login">Log in</Link>
         <Link to="/signup">Register</Link>
         <Link to="/dashboard">Dashboard</Link>
+        <Link to="/">Log Out</Link>
       </nav>
     </div>
   );
