@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import FoodCard from "./CharacterCard";
+import FoodsCard from "./FoodsCard";
+import axiosWithAuth from "../../axiosWithAuth";
 
 const FoodList = props => {
   // set the state for the data
@@ -10,9 +11,10 @@ const FoodList = props => {
 
   useEffect(() => {
     const getFoods = () => {
-      Axios.get("https://build-gigapet.herokuapp.com/api/food")
+      axiosWithAuth()
+        .get("https://build-gigapet.herokuapp.com/api/food")
         .then(response => {
-          // console.log("Response: ", response);
+          console.log("Response: ", response);
 
           // we're going to set a variable that contains an array of characters, using the search term as a filter
           const result = response.data.results.filter(food =>
@@ -55,7 +57,7 @@ const FoodList = props => {
       {/* Now we're going to create a card for each item in the api, based on the filters we used */}
       <div className="grid-view">
         {data.map(item => (
-          <FoodCard key={item.id} food={item} />
+          <FoodsCard key={item.id} food={item} />
         ))}
       </div>
     </div>

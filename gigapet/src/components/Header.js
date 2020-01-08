@@ -9,24 +9,22 @@ import Dashboard from "../components/Dashboard";
 //TODO: Still need to hook conditional statements into the navlinks to toggle display:none based on login/registered state.
 
 const Header = function(props) {
+  const logout = () => {
+    localStorage.setItem("ID", -1);
+    localStorage.setItem("name", undefined);
+    localStorage.setItem("token", undefined);
+  };
+
   useEffect(() => {
-    // Update the document title using the browser API
-    // document.title = `You clicked ${count} times`;
     if (localStorage.getItem("ID") !== -1) {
-      console.log(localStorage.getItem("name"));
-      document.getElementById("login-button").href = "/dashboard";
+      // console.log(localStorage.getItem("name"));
+      document.getElementById("login-button").href = "/login";
       document.getElementById("login-button").innerHTML = localStorage.getItem(
         "name",
       );
       document.getElementById("register-button").style.display = "none";
     }
   });
-
-  const logout = () => {
-    localStorage.setItem("ID", -1);
-    localStorage.setItem("name", undefined);
-    localStorage.setItem("token", undefined);
-  };
 
   return (
     <div>

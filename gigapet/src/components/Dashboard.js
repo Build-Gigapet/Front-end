@@ -2,6 +2,7 @@ import React from "react";
 import axiosWithAuth from "../axiosWithAuth";
 import UpdateForm from "./UpdateForm";
 import { Link } from "react-router-dom";
+import FoodsGrid from "./FoodsList/FoodsGrid";
 
 const Dashboard = props => {
   // const [children, setChildren] = useState([]);
@@ -30,6 +31,7 @@ const Dashboard = props => {
       <main>
         <div>
           <h2>Food</h2>
+          <FoodsGrid />
           <p> Child Name</p>
           <p>Score</p>
 
