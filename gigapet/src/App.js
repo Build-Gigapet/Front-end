@@ -27,7 +27,7 @@ function App() {
     <Router history={history}>
       <div className="App">
         <Header />
-        <ul>
+        {/* <ul>
           <li>
             <Link to="/signup">Sign Up</Link>
           </li>
@@ -37,9 +37,9 @@ function App() {
           <li>
             <Link to="/login">Log In</Link>
           </li>
-          {/* <li><Link to="protected">Parent</Link></li> */}
-        </ul>
-        <Route exact path="/" component={SignUp} />
+          {/* <li><Link to="protected">Parent</Link></li>
+        </ul> */}
+        <Route exact path="/" component={Login} />
         <Route
           path={`/auth/:id`}
           render={props => {
@@ -53,7 +53,6 @@ function App() {
           }}
         />
         <Route path={"/login"} component={Login} />
-
         {/* <Switch>
           <PrivateRoute path="/protected" component={Parent} />
           <Route exact path="/protected" component={Parent} />

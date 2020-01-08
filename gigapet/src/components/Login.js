@@ -30,37 +30,46 @@ const Login = props => {
   };
 
   return (
-    <div>
-      <Header />
-      <Form>
-        <FormGroup>
-          <Label for="username">Email</Label>
-          <Input
-            style={{ width: 500 }}
-            type="text"
-            className="email"
-            name="email"
-            placeholder="email"
-            value={login.email}
-            onChange={handleChange}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label for="password">Password</Label>
-          <Input
-            style={{ width: 500 }}
-            type="password"
-            name="password"
-            placeholder="password"
-            value={login.password}
-            onChange={handleChange}
-          />
-        </FormGroup>
-        <Button color="success" onSubmit={onSubmit}>
-          SignUp
-        </Button>
-        {login.isFetching && "Please Wait"}
-      </Form>
+    <div
+      id="content-wrapper"
+      style={{
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div>
+        <Form>
+          <FormGroup>
+            <Label for="username">Email</Label>
+            <Input
+              style={{ width: 500 }}
+              type="text"
+              className="email"
+              name="email"
+              placeholder="email"
+              value={login.email}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label for="password">Password</Label>
+            <Input
+              style={{ width: 500 }}
+              type="password"
+              name="password"
+              placeholder="password"
+              value={login.password}
+              onChange={handleChange}
+            />
+          </FormGroup>
+          <Button color="success" onSubmit={onSubmit}>
+            Log In
+          </Button>
+          {login.isFetching && "Please Wait"}
+        </Form>
+      </div>
     </div>
   );
 };

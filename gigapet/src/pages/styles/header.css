@@ -1,0 +1,18 @@
+.header {
+  border-bottom: 2px solid black;
+}
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h1 {
+  font-family: "Sigmar One", cursive;
+  font-size: 100px;
+  color: #1f74ac;
+}
+
+.header img {
+  max-width: 5%;
+}
