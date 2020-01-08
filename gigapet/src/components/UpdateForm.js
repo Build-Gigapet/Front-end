@@ -1,13 +1,29 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axiosWithAuth";
+const initialUser = {
 
-const UpdateForm = (users, props) => {
+    id: new Date(),
+    name: "",
+    email: ""
+};
+const UpdateForm = props => {
 
     const [editing, setEditing] = useState(false);
     const [userToEdit, setUserToEdit] = useState(initialUser);
+    const [users, setUsers] = useState([]);
+    const addUser = user => {
+        setUsers([...users, user]);
+    };
+    const getUser = () => {
+        axiosWithAuth().get('https://build-gigapet.herokuapp.com/api/auth/:id')
+            .then(res => {
+                console.log(res.data)
+                setUsers({ users: res.data })
+            })
+            .catch(err => console.log(err));
+    }
 
-
-
+    console.log(users);
 
     const editUser = user => {
         setEditing(true);
@@ -19,7 +35,7 @@ const UpdateForm = (users, props) => {
         axiosWithAuth()
             .put('https://build-gigapet.herokuapp.com/api/auth/:id', userToEdit)
             .then(res => {
-                setUserToEdit(users.map(user => {
+                setUsers(users.map(user => {
                     if (userToEdit.id === user.id) {
                         return user = res.data
                     } else {
@@ -34,10 +50,10 @@ const UpdateForm = (users, props) => {
 
     const deleteUser = id => {
 
-        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/:id`)
+        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
             .then(res => {
                 console.log(res.data)
-                setUserToEdit(users.filter(user => {
+                setUsers(users.filter(user => {
                     return user.id !== id;
                 }))
                 props.history.push('/protected');
