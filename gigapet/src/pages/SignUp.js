@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import Header from "../components/Header";
 
 const SignUp = props => {
   const [signup, setSignup] = useState({
