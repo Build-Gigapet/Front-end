@@ -2,9 +2,9 @@ import axios from 'axios';
 const axiosWithAuth = () => {
     const token = localStorage.getItem('token');
     return axios.create({
-        baseUrl: 'https://build-gigapet.herokuapp.com',
+        baseUrl: "https://build-gigapet.herokuapp.com/api",
         headers: {
-            'Authorization': token,
+            'Authorization': 'token',
             'Content-Type': 'application/json'
         }
     })

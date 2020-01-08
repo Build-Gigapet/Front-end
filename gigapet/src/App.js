@@ -1,5 +1,5 @@
 
-import Login from "./components/Login";
+import Login from "./pages/Login";
 import Dashboard from "./components/Dashboard";
 import React, { useState } from 'react';
 import { Router, Route, Link, Switch } from 'react-router-dom';
@@ -27,11 +27,13 @@ function App() {
   return (
     <Router history={history}>
       <div className='App'>
+
+
         <ul>
           <li>
-            <Link to='/signup'>Sign Up</Link>
+            <Link to='/'>Sign Up</Link>
           </li>
-          <Link to="/protected">Dashboard</Link>
+          <Link to="/dashboard">Dashboard</Link>
           <li>
             <Link to='/auth/:id'>Update Form</Link>
           </li>
@@ -41,7 +43,7 @@ function App() {
           <li><Link to='/protected'>Parent</Link></li>
         </ul>
         <Switch>
-          <PrivateRoute path="/protected" component={Dashboard} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path='/protected' component={Parent} />
           <Route exact path='/protected' component={Parent} />
           <Route path='/' component={SignUp} />

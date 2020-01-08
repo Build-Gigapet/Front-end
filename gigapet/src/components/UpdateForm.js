@@ -5,7 +5,7 @@ const initialUser = {
     id: ""
 };
 const UpdateForm = ({ users, updateUsers, props }) => {
-    // const [food, setFood] = useState([]);
+
     const [editing, setEditing] = useState(false);
     const [userToEdit, setUserToEdit] = useState(initialUser);
     console.log(users);
