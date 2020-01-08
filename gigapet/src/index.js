@@ -22,7 +22,7 @@ const routing = (
           <Link to='/signup'>Sign Up</Link>
         </li>
         <li>
-          <Link to='/auth/register'>Register</Link>
+          <Link to='/auth/users/'>User</Link>
         </li>
         <Link to="/protected">Dashboard</Link>
         <li>

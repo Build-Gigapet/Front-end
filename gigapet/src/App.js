@@ -7,7 +7,7 @@ import PrivateRoute from './components/PrivateRoute';
 import SignUp from './pages/SignUp';
 import UpdateForm from './components/UpdateForm';
 import Parent from './components/Parent';
-import Register from "./components/Register";
+import User from "./components/User";
 import { createBrowserHistory } from 'history';
 // import './App.css';
 
@@ -27,7 +27,7 @@ function App() {
             <Link to='/signup'>Sign Up</Link>
           </li>
           <li>
-            <Link to='/auth/register'>Register</Link>
+            <Link to='/api/auth/users'>User</Link>
           </li>
           <Link to="/dashboard">Dashboard</Link>
           <li>
@@ -43,7 +43,7 @@ function App() {
           <PrivateRoute path='/protected' component={Parent} /> */}
           <Route exact path='/protected' component={Parent} />
           <Route path='/signup' component={SignUp} />
-          <Route path='/auth/register' component={Register} />
+          {/* <Route path='/auth/' component={User} /> */}
           <Route exact path="/dashboard" component={Dashboard} />
           {/* <Route exact path="/" component={SignUp} /> */}
           <Route

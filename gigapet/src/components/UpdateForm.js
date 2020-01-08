@@ -10,20 +10,6 @@ const UpdateForm = props => {
 
     const [editing, setEditing] = useState(false);
     const [userToEdit, setUserToEdit] = useState(initialUser);
-    const [users, setUsers] = useState([]);
-    const addUser = user => {
-        setUsers([...users, user]);
-    };
-    const getUser = () => {
-        axiosWithAuth().get('https://build-gigapet.herokuapp.com/api/auth/:id')
-            .then(res => {
-                console.log(res.data)
-                setUsers({ users: res.data })
-            })
-            .catch(err => console.log(err));
-    }
-
-    console.log(users);
 
     const editUser = user => {
         setEditing(true);
@@ -35,7 +21,7 @@ const UpdateForm = props => {
         axiosWithAuth()
             .put('https://build-gigapet.herokuapp.com/api/auth/:id', userToEdit)
             .then(res => {
-                setUsers(users.map(user => {
+                setUserToEdit(props.users.map(user => {
                     if (userToEdit.id === user.id) {
                         return user = res.data
                     } else {
@@ -43,7 +29,7 @@ const UpdateForm = props => {
                     }
 
                 }))
-                props.history.push("/protected");
+                window.location = ("/");
             })
             .catch(err => console.log(err.response));
     };
@@ -53,7 +39,7 @@ const UpdateForm = props => {
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
             .then(res => {
                 console.log(res.data)
-                setUsers(users.filter(user => {
+                setUserToEdit(props.users.filter(user => {
                     return user.id !== id;
                 }))
                 props.history.push('/protected');
@@ -65,16 +51,8 @@ const UpdateForm = props => {
 
     return (
         <div>
-            <p>users</p>
-            <ul>
-                {users.map(user => (
-                    <li key={user.user}><span className="delete" onClick={() => deleteUser(user.id)}>Delete</span></li>
-                ))}
-            </ul>
             <form>
-                <h3>{users.name}</h3>
-                <h3>{users.email}</h3>
-                <p>Let's edit</p>
+                <h3>Let's edit</h3>
                 <input type="text" name="name" placeholder="name" />
                 <input type="email" name="email" placeholder="email" />
                 <button onClick={editUser}>EDIT</button>
