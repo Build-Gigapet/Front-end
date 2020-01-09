@@ -9,28 +9,28 @@ const initialUser = {
 const UpdateForm = (props, users) => {
 
     const [editing, setEditing] = useState(false);
-    const [userToEdit, setUserToEdit] = useState(initialUser);
+    const [user, setUser] = useState(initialUser);
 
     const editUser = user => {
         setEditing(true);
-        setUserToEdit(user);
+        setUser(user);
     }
     useEffect(() => {
         const saveEdit = e => {
             e.preventDefault();
             axiosWithAuth()
-                .put(`https://build-gigapet.herokuapp.com/api/auth/${userToEdit.id}`, userToEdit)
+                .put(`https://build-gigapet.herokuapp.com/api/auth/${user.id}`, userToEdit)
                 .then(results => {
                     console.log(results)
-                    setUserToEdit(props.users.map(user => {
-                        if (userToEdit.id === user.id) {
+                    setUser(props.users.map(user => {
+                        if (props.users.id === user.id) {
                             return user = results.data
                         } else {
                             return user
                         }
 
                     }))
-                    window.location = ("/");
+                    window.location = ("/dashboard");
                 })
                 .catch(err => console.log(err.response));
         };
