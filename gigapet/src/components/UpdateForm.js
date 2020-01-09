@@ -19,7 +19,7 @@ const UpdateForm = (props, users) => {
         const saveEdit = e => {
             e.preventDefault();
             axiosWithAuth()
-                .put(`https://build-gigapet.herokuapp.com/api/auth/${user.id}`, userToEdit)
+                .put(`https://build-gigapet.herokuapp.com/api/auth/${user.id}`, user)
                 .then(results => {
                     console.log(results)
                     setUser(props.users.map(user => {
@@ -40,7 +40,7 @@ const UpdateForm = (props, users) => {
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
             .then(results => {
                 console.log(results.data)
-                setUserToEdit(props.users.filter(user => {
+                setUser(props.users.filter(user => {
                     return user.id !== id;
                 }))
                 props.history.push('/protected');
