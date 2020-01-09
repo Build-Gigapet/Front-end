@@ -9,27 +9,27 @@ const initialUser = {
 const UserCard = props => {
 
     const [editing, setEditing] = useState(false);
-    const [userToEdit, setUserToEdit] = useState(initialUser);
+    const [user, setUser] = useState(initialUser);
 
     const editUser = user => {
         setEditing(true);
-        setUserToEdit(user);
+        setUser(user);
     }
 
     const saveEdit = e => {
         e.preventDefault();
         axiosWithAuth()
-            .put(`https://build-gigapet.herokuapp.com/api/auth/${userToEdit.id}`, userToEdit)
+            .put(`https://build-gigapet.herokuapp.com/api/auth/${user.id}`, user)
             .then(results => {
-                setUserToEdit(props.users.map(user => {
-                    if (userToEdit.id === user.id) {
+                props.updateUsers(props.users.map(user => {
+                    if (props.users.id === user.id) {
                         return user = results.data
                     } else {
                         return user
                     }
 
                 }))
-                window.location = ("/");
+                window.location = ("/dashboard");
             })
             .catch(err => console.log(err.response));
     };
@@ -39,32 +39,44 @@ const UserCard = props => {
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
             .then(results => {
                 console.log(results.data)
-                setUserToEdit(props.users.filter(user => {
+                props.updateUsers(props.users.filter(user => {
                     return user.id !== id;
                 }))
-                props.history.push('/protected');
+                window.location = ('/dashboard');
             })
             .catch(err => console.log(err));
     };
-    return (
-        <div>
-            <h3>{props.users.name}</h3>
-            <h3>{props.users.email}</h3>
+    console.log(user);
+    if (props.users.length > 0) {
+        return (
+            <div>
+
+                <p>users</p>
+                <div>
+
+                    {props.users.map(user => {
+                        return (
+                            <div key={user.id}><h3>{user.name}</h3>
+                                <h3>{user.email}</h3></div>
 
 
-            {/* <form>
-                <h3>Edit  name and email here</h3>
-                <input type="text" name="name" placeholder="name" />
-                <input type="email" name="email" placeholder="email" />
-                <button onClick={editUser}>EDIT</button>
-                <button className="md-button" onClick={deleteUser}>DELETE</button>
+                        )
+                    })}
 
-                <input type="submit" value="submit" />
-            </form> */}
-        </div>
+                </div>
 
-    )
+                <div>
+                    {editing && (<form onSubmit={saveEdit}><lengend>edit user</lengend><label>name:<input onChange={e => setUser({ ...user, user: e.target.value })} value={user.name} /></label><label>email:<input onChange={e => setUser({ ...user, email: e.target.value })} value={user.email} /></label><div className="button-row"><button onClick={() => editUser(user)}>Edit</button>
+                        <button onClick={() => setEditing(false)}>cancel</button>
+                        <button onClick={() => deleteUser(user.id)}>Delete</button></div></form>)}
 
+
+                </div>
+            </div>
+        )
+    } else {
+        return <h1>Loading users...</h1>
+    }
 }
 
 export default UserCard;

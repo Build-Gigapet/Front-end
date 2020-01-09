@@ -19,7 +19,7 @@ const UpdateForm = (props, users) => {
         const saveEdit = e => {
             e.preventDefault();
             axiosWithAuth()
-                .put(`https://build-gigapet.herokuapp.com/api/auth/${user.id}`, user)
+                .put(`https://build-gigapet.herokuapp.com/api/auth/:id`, user)
                 .then(results => {
                     console.log(results)
                     setUser(props.users.map(user => {
@@ -34,7 +34,7 @@ const UpdateForm = (props, users) => {
                 })
                 .catch(err => console.log(err.response));
         };
-    }, [])
+    }, [user, props.users])
     const deleteUser = id => {
 
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
@@ -43,7 +43,7 @@ const UpdateForm = (props, users) => {
                 setUser(props.users.filter(user => {
                     return user.id !== id;
                 }))
-                props.history.push('/protected');
+                window.location = ('/dashboard');
             })
             .catch(err => console.log(err));
     };
@@ -56,7 +56,7 @@ const UpdateForm = (props, users) => {
                 <h3>Edit  name and email here</h3>
                 <input type="text" name="name" placeholder="name" />
                 <input type="email" name="email" placeholder="email" />
-                <button onClick={editUser}>EDIT</button>
+                <button onClick={() => setEditing(false)}>EDIT</button>
                 <button className="md-button" onClick={deleteUser}>DELETE</button>
 
                 <input type="submit" value="submit" />

@@ -19,8 +19,6 @@ const Parent = props => {
 
     const [kid, setKid] = useState(initialKid);
 
-
-
     const handleChange = e => {
         setKid({
 
@@ -38,17 +36,17 @@ const Parent = props => {
     const editKid = (e, id) => {
         e.preventDefault();
         axiosWithAuth()
-            .put(`https://build-gigapet.herokuapp.com/api/kid/${kid.id}`, kid)
+            .put(`https://build-gigapet.herokuapp.com/api/kid/:id`, kid)
             .then(results => {
                 setKid(kid.map(kid => {
-                    if (id === kid.id) {
+                    if (kid.id !== id) {
                         return kid = kid.results.data
                     } else {
                         return kid
                     }
 
                 }))
-                window.location = ("/");
+                window.location = ("/dashboard");
             })
             .catch(err => console.log(err.response));
     };
