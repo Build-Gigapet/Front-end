@@ -15,9 +15,10 @@ class Parent extends React.Component {
                 fav_food: "",
                 weight: "",
             }
+
+
         };
     }
-
 
     handleChange = e => {
         this.setState({
@@ -33,19 +34,52 @@ class Parent extends React.Component {
 
     }
 
+    editKid = e => {
+        e.preventDefault();
+        axiosWithAuth()
+            .put('https://build-gigapet.herokuapp.com/api/kid/:id', this.state.kid)
+            .then(res => {
+                this.setState(this.state.kid.map(user => {
+                    if (kid.id === kid.id) {
+                        return kid = res.data
+                    } else {
+                        return kid
+                    }
+
+                }))
+                window.location = ("/");
+            })
+            .catch(err => console.log(err.response));
+    };
+
+    deleteKid = id => {
+
+        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/kid/:id`)
+            .then(res => {
+                console.log(results)
+                this.setState(kid.filter(user => {
+                    return kid.id !== id;
+                }))
+
+            })
+            .catch(err => console.log(err));
+    };
+
+
     handleSubmit = event => {
         event.preventDefault();
-        console.log(this.state)
+        console.log(this.state.kid)
         axiosWithAuth()
-            .post(`https://build-gigapet.herokuapp.com/api/kid/2`, this.state)
-            .then(response => {
-                console.log(response);
-                this.setState(response.data)
+            .post(`https://build-gigapet.herokuapp.com/api/kid/2`, this.state.kid)
+            .then(result => {
+                localStorage.setItem(result.data.kid);
+                window.location('/');
             })
             .catch(error => {
                 console.log(error)
-            })
-    }
+            });
+    };
+
     render() {
         return (
             <div className="parent-form">
@@ -61,6 +95,8 @@ class Parent extends React.Component {
                     <input type="text" name="fav_food" placeholder="favorite food" value={this.state.fav_food} onChange={this.handleChange} />
                     <input type="text" name="weight" placeholder="weight" value={this.state.weight} onChange={this.handleChange} />
                     <button type="submit" formMethod="post">Add Child </button>
+
+
 
                 </form>
 

@@ -24,27 +24,28 @@ const User = () => {
             <div>
                 <ul>
                     {users.map(user => (
-                        <li key={user.id} className="name">{user.name}</li>
-                    ))}
+                        <div key={user.id}>
+                            <h2 className="name">{user.name}</h2>
+                            ))}
                     <li>{users.email}</li>
 
 
                 </ul>
             </div>
-            <div>
-                <h3>{users.name}</h3>
-                <h3>{users.email}</h3>
+                <div>
+                    <h3>{users.name}</h3>
+                    <h3>{users.email}</h3>
 
+                </div>
             </div>
-        </div>
-    )
-}
-export default User;
-
-
-
-// import React from 'react';
-// import { Link } from "react-router-dom";
+            )
+        }
+        export default User;
+        
+        
+        
+        // import React from 'react';
+// import {Link} from "react-router-dom";
 // const initialUser = {
 
 //     id: new Date(),

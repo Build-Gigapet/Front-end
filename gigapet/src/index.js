@@ -6,7 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 // import App from "./App";
-
+import Parent from "./components/Parent";
 import PrivateRoute from "./components/PrivateRoute";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
@@ -23,6 +23,7 @@ const routing = (
       <Route path="/sign-up" component={SignUp} />
       <Route path="/login" component={Login} />
       <Route path="/dashboard" component={Dashboard} />
+      <Route path="/parent" component={Parent} />
     </div>
   </Router>
 );
