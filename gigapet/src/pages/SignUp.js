@@ -10,11 +10,8 @@ const SignUp = props => {
   });
 
   useEffect(() => {
-    // Update the document title using the browser API
-    // document.title = `You clicked ${count} times`;
-    if (localStorage.getItem("ID") !== -1) {
-      // window.location = "/dashboard";
-    }
+    if (localStorage.getItem("ID") != undefined)
+      window.location = "/dashboard";
   }, []);
 
   const handleChange = e => {

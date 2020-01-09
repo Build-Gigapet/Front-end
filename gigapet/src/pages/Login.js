@@ -11,9 +11,8 @@ const Login = props => {
   useEffect(() => {
     // Update the document title using the browser API
     // document.title = `You clicked ${count} times`;
-    if (localStorage.getItem("ID") !== -1) {
+    if (localStorage.getItem("ID") != undefined)
       window.location = "/dashboard";
-    }
   }, []);
 
   const handleChange = e => {
@@ -25,11 +24,9 @@ const Login = props => {
 
   const onSubmit = e => {
     e.preventDefault();
-    console.log(";askldfjasdkl;sdjfsdjfklsd");
     axiosWithAuth()
       .post("https://build-gigapet.herokuapp.com/api/auth/login", login)
       .then(result => {
-        console.log(result);
         localStorage.setItem("ID", result.data.id);
         localStorage.setItem(
           "name",
