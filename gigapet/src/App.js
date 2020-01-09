@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-
-import Login from "./pages/Login";
-import Dashboard from "./components/Dashboard";
-import React, { useState } from 'react';
-import { Router, Route, Link, Switch } from 'react-router-dom';
-import PrivateRoute from './components/PrivateRoute';
-import SignUp from './pages/SignUp';
-import UpdateForm from './components/UpdateForm';
-import Parent from './components/Parent';
-import { createBrowserHistory } from 'history';
-=======
 import React, { useState } from "react";
 import { Router, Route, Link, Switch } from "react-router-dom";
 import PrivateRoute from "./components/PrivateRoute";
@@ -19,7 +7,6 @@ import UpdateForm from "./components/UpdateForm";
 // import Parent from "./components/Parent";
 import { createBrowserHistory } from "history";
 import Header from "./components/Header";
->>>>>>> Michael-Phelps
 // import './App.css';
 
 const history = createBrowserHistory();
@@ -38,16 +25,9 @@ function App() {
   // }
   return (
     <Router history={history}>
-<<<<<<< HEAD
-      <div className='App'>
-
-
-        <ul>
-=======
       <div className="App">
         <Header />
         {/* <ul>
->>>>>>> Michael-Phelps
           <li>
             <Link to='/'>Sign Up</Link>
           </li>
@@ -58,38 +38,6 @@ function App() {
           <li>
             <Link to='/login'>Log In</Link>
           </li>
-<<<<<<< HEAD
-          <li><Link to='/protected'>Parent</Link></li>
-        </ul>
-        <Switch>
-          <PrivateRoute path="/dashboard" component={Dashboard} />
-          <PrivateRoute path='/protected' component={Parent} />
-          <Route exact path='/protected' component={Parent} />
-          <Route path='/' component={SignUp} />
-          <Route exact path="/protected" component={Dashboard} />
-          {/* <Route exact path="/" component={SignUp} /> */}
-          <Route
-            path={`/auth/:id`}
-            render={props => {
-              return (
-                <UpdateForm
-                  {...props}
-                  history={history}
-                  updateUsers={updateUsers}
-                />
-              );
-            }}
-          />
-          <Route path={'/login'} component={Login} />
-
-
-        </Switch>
-
-
-
-
-
-=======
           {/* <li><Link to="protected">Parent</Link></li>
         </ul> */}
         {/* <Route exact path="/" component={Login} /> */}
@@ -110,9 +58,8 @@ function App() {
         {/* <Switch>
           <PrivateRoute path="/protected" component={Parent} />
           <Route exact path="/protected" component={Parent} />
->>>>>>> Michael-Phelps
 
-
+        </Switch> */}
       </div>
     </Router>
   );

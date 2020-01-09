@@ -4,7 +4,7 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 const Login = props => {
   const [login, setLogin] = useState({
-    email: "",
+    name: "",
     password: "",
   });
 
@@ -21,7 +21,7 @@ const Login = props => {
       .post("https://build-gigapet.herokuapp.com/api/auth/login", login)
       .then(result => {
         localStorage.setItem("token", result.data.token);
-        this.props.history.push("/protected");
+        window.location("/");
       })
       .catch(err => {
         console.log(err);
@@ -32,14 +32,14 @@ const Login = props => {
     <div>
       <form>
         <FormGroup>
-          <Label for="username">Email</Label>
+          <Label for="username">name</Label>
           <Input
             style={{ width: 500 }}
             type="text"
-            className="email"
-            name="email"
-            placeholder="email"
-            value={login.email}
+            className="name"
+            name="name"
+            placeholder="name"
+            value={login.name}
             onChange={handleChange}
           />
         </FormGroup>
