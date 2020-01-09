@@ -19,9 +19,9 @@ const Header = function(props) {
     if (localStorage.getItem("ID") !== -1) {
       // console.log(localStorage.getItem("name"));
       document.getElementById("login-button").href = "/login";
-      document.getElementById("login-button").innerHTML = localStorage.getItem(
-        "name",
-      );
+      // document.getElementById("login-button").innerHTML = localStorage.getItem(
+      // "name",
+      // );
       document.getElementById("register-button").style.display = "none";
     }
   });

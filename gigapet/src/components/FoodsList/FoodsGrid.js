@@ -3,6 +3,7 @@ import Axios from "axios";
 import FoodsCard from "./FoodsCard";
 import axiosWithAuth from "../../axiosWithAuth";
 
+const token = localStorage.getItem("token");
 const FoodList = props => {
   // set the state for the data
   const [data, setData] = useState([]);
@@ -12,7 +13,11 @@ const FoodList = props => {
   useEffect(() => {
     const getFoods = () => {
       axiosWithAuth()
-        .get("https://build-gigapet.herokuapp.com/api/food")
+        .get("https://build-gigapet.herokuapp.com/api/food", {
+          params: {
+            token: token,
+          },
+        })
         .then(response => {
           console.log("Response: ", response);
 
