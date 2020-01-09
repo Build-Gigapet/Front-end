@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 const initialUser = {
 
@@ -6,7 +6,7 @@ const initialUser = {
     name: "",
     email: ""
 };
-const UpdateForm = (props, user) => {
+const UpdateForm = (props, users) => {
 
     const [editing, setEditing] = useState(false);
     const [userToEdit, setUserToEdit] = useState(initialUser);
@@ -15,25 +15,26 @@ const UpdateForm = (props, user) => {
         setEditing(true);
         setUserToEdit(user);
     }
+    useEffect(() => {
+        const saveEdit = e => {
+            e.preventDefault();
+            axiosWithAuth()
+                .put(`https://build-gigapet.herokuapp.com/api/auth/${userToEdit.id}`, userToEdit)
+                .then(results => {
+                    console.log(results)
+                    setUserToEdit(props.users.map(user => {
+                        if (userToEdit.id === user.id) {
+                            return user = results.data
+                        } else {
+                            return user
+                        }
 
-    const saveEdit = e => {
-        e.preventDefault();
-        axiosWithAuth()
-            .put(`https://build-gigapet.herokuapp.com/api/auth/${userToEdit.id}`, userToEdit)
-            .then(results => {
-                setUserToEdit(props.users.map(user => {
-                    if (userToEdit.id === user.id) {
-                        return user = results.data
-                    } else {
-                        return user
-                    }
-
-                }))
-                window.location = ("/");
-            })
-            .catch(err => console.log(err.response));
-    };
-
+                    }))
+                    window.location = ("/");
+                })
+                .catch(err => console.log(err.response));
+        };
+    }, [])
     const deleteUser = id => {
 
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)

@@ -46,8 +46,8 @@ const Header = function (props) {
 
 
           <a href="/dashboard">Dashboard</a>
-
-          <a href="/update">UpdateForm</a>
+          {/* 
+          <a href="/update">UpdateForm</a> */}
           <a href="/parent">Parent</a>
 
 
@@ -56,7 +56,7 @@ const Header = function (props) {
             <Route exact path="/protected" component={Parent} />
             <Route path='/dashboard' component={Dashboard} />
             <Route path='/parent' component={Parent} />
-            <Route path='/update' component={UpdateForm} />
+            {/* <Route path='/update' component={UpdateForm} /> */}
             <Route path='/login' component={Login} />
             <Route path='/sign-up' component={SignUp} />
           </Switch>
