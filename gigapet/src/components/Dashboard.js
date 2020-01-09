@@ -4,6 +4,9 @@ import axiosWithAuth from "../axiosWithAuth";
 
 import UpdateForm from "./UpdateForm";
 import { Link } from "react-router-dom";
+import FoodsCard from "./FoodsList/FoodsCard";
+import FoodsGrid from "./FoodsList/FoodsGrid";
+import User from "./User"
 
 const Dashboard = props => {
   // const [children, setChildren] = useState([]);
@@ -31,9 +34,13 @@ const Dashboard = props => {
       </header>
       <main>
         <div>
-          <h2>Food</h2>
-          <p> Child Name</p>
-          <p>Score</p>
+          <h2>Food Section</h2>
+          <FoodsCard />
+          <FoodsGrid />
+
+          <h2> Child Section</h2>
+          <p>User Info</p>
+          <User />
 
           {/* {children && children.map(child => {
                     return (

@@ -1,47 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axiosWithAuth from '../axiosWithAuth';
-class Parent extends React.Component {
+import UpdateForm from './UpdateForm';
+import FoodsUpdateForm from "./FoodsUpdateForm";
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            kid: {
-                id: new Date(),
-                kid_name: "",
-                age: "",
-                pet_name: "",
-                score: "",
-                height: "",
-                fav_food: "",
-                weight: "",
-            }
+const initialKid = {
+    id: new Date(),
+    kid_name: "",
+    age: "",
+    pet_name: "",
+    score: "",
+    height: "",
+    fav_food: "",
+    weight: "",
+
+}
+const Parent = props => {
 
 
-        };
-    }
+    const [kid, setKid] = useState(initialKid);
 
-    handleChange = e => {
-        this.setState({
+
+
+    const handleChange = e => {
+        setKid({
 
             [e.target.name]: e.target.value
         });
     }
 
 
-    addKid = (kid) => {
+    const addKid = kid => {
         console.log(kid)
-        this.setState({ kid: [...this.state.kid, kid] })
+        this.setState({ kid: [...kid, kid] })
 
     }
 
-    editKid = e => {
+    const editKid = (e, id) => {
         e.preventDefault();
         axiosWithAuth()
-            .put('https://build-gigapet.herokuapp.com/api/kid/:id', this.state.kid)
-            .then(res => {
-                this.setState(this.state.kid.map(user => {
-                    if (kid.id === kid.id) {
-                        return kid = res.data
+            .put(`https://build-gigapet.herokuapp.com/api/kid/${kid.id}`, kid)
+            .then(results => {
+                setKid(kid.map(kid => {
+                    if (id === kid.id) {
+                        return kid = kid.results.data
                     } else {
                         return kid
                     }
@@ -52,12 +53,12 @@ class Parent extends React.Component {
             .catch(err => console.log(err.response));
     };
 
-    deleteKid = id => {
+    const deleteKid = id => {
 
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/kid/:id`)
             .then(res => {
-                console.log(results)
-                this.setState(kid.filter(user => {
+                console.log(kid.results)
+                this.setState(kid.filter(kid => {
                     return kid.id !== id;
                 }))
 
@@ -66,13 +67,13 @@ class Parent extends React.Component {
     };
 
 
-    handleSubmit = event => {
+    const handleSubmit = event => {
         event.preventDefault();
-        console.log(this.state.kid)
+        console.log(kid)
         axiosWithAuth()
-            .post(`https://build-gigapet.herokuapp.com/api/kid/2`, this.state.kid)
+            .post(`https://build-gigapet.herokuapp.com/api/kid/3`, kid)
             .then(result => {
-                localStorage.setItem(result.data.kid);
+                localStorage.setItem({ kid: result.data });
                 window.location('/');
             })
             .catch(error => {
@@ -80,33 +81,37 @@ class Parent extends React.Component {
             });
     };
 
-    render() {
-        return (
-            <div className="parent-form">
+
+    return (
+        <div className="parent-form">
+
+            <h3>Enter Kids Here</h3>
 
 
 
-                <form onSubmit={this.handleSubmit} method="get">
-                    <input type="text" name="kid_name" placeholder="kid_name" value={this.state.kid_name} onChange={this.handleChange} />
-                    <input type="number" name="age" placeholder="age" value={this.state.age} onChange={this.handleChange} />
-                    <input type="text" name="pet_name" placeholder="pet name" value={this.state.pet_name} onChange={this.handleChange} />
-                    <input type="number" name="score" placeholder="Score" value={this.state.score} onChange={this.handleChange} />
-                    <input type="number" name="height" placeholder="height" value={this.state.height} onChange={this.handleChange} />
-                    <input type="text" name="fav_food" placeholder="favorite food" value={this.state.fav_food} onChange={this.handleChange} />
-                    <input type="text" name="weight" placeholder="weight" value={this.state.weight} onChange={this.handleChange} />
-                    <button type="submit" formMethod="post">Add Child </button>
+            <form onSubmit={handleSubmit}>
+                <input type="text" name="kid_name" placeholder="kid_name" value={kid.kid_name} onChange={handleChange} />
+                <input type="number" name="age" placeholder="age" value={kid.age} onChange={handleChange} />
+                <input type="text" name="pet_name" placeholder="pet name" value={kid.pet_name} onChange={handleChange} />
+                <input type="number" name="score" placeholder="Score" value={kid.score} onChange={handleChange} />
+                <input type="number" name="height" placeholder="height" value={kid.height} onChange={handleChange} />
+                <input type="text" name="fav_food" placeholder="favorite food" value={kid.fav_food} onChange={handleChange} />
+                <input type="text" name="weight" placeholder="weight" value={kid.weight} onChange={handleChange} />
+                <button type="submit">Add Child </button>
+                <UpdateForm /><br />
+                <FoodsUpdateForm />
 
 
 
-                </form>
+            </form>
 
 
-            </div>
+        </div>
 
 
-        )
-    }
+    )
 }
+
 export default Parent;
 
 

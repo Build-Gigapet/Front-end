@@ -8,8 +8,8 @@ export default function FoodCard(props) {
     <Row>
       <Col sm="6">
         <Card body>
-          <CardTitle>{props.food.food_name}</CardTitle>
-          <CardText>{props.food.food_type}</CardText>
+          <CardTitle>{props.food_name}</CardTitle>
+          <CardText>{props.food_type}</CardText>
         </Card>
       </Col>
     </Row>

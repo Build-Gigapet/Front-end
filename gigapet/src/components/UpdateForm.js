@@ -6,7 +6,7 @@ const initialUser = {
     name: "",
     email: ""
 };
-const UpdateForm = props => {
+const UpdateForm = (props, user) => {
 
     const [editing, setEditing] = useState(false);
     const [userToEdit, setUserToEdit] = useState(initialUser);
@@ -19,11 +19,11 @@ const UpdateForm = props => {
     const saveEdit = e => {
         e.preventDefault();
         axiosWithAuth()
-            .put('https://build-gigapet.herokuapp.com/api/auth/:id', userToEdit)
-            .then(res => {
+            .put(`https://build-gigapet.herokuapp.com/api/auth/${userToEdit.id}`, userToEdit)
+            .then(results => {
                 setUserToEdit(props.users.map(user => {
                     if (userToEdit.id === user.id) {
-                        return user = res.data
+                        return user = results.data
                     } else {
                         return user
                     }
@@ -37,8 +37,8 @@ const UpdateForm = props => {
     const deleteUser = id => {
 
         axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
-            .then(res => {
-                console.log(res.data)
+            .then(results => {
+                console.log(results.data)
                 setUserToEdit(props.users.filter(user => {
                     return user.id !== id;
                 }))
@@ -52,26 +52,12 @@ const UpdateForm = props => {
     return (
         <div>
             <form>
-                <h3>Let's edit</h3>
+                <h3>Edit  name and email here</h3>
                 <input type="text" name="name" placeholder="name" />
                 <input type="email" name="email" placeholder="email" />
                 <button onClick={editUser}>EDIT</button>
                 <button className="md-button" onClick={deleteUser}>DELETE</button>
 
-                {/* <label>
-                    Pick your Food Category
-                <select>
-                        <option value="fruit">fruit</option>
-                        <option value="vegetable">vegetable</option>
-                        <option value="whole grains">whole grains</option>
-                        <option value="meat">meat</option>
-                        <option value="dairy">dairy</option>
-                        <option value="fats_&_oils">fats & oils</option>
-                        <option value="treats">treats</option>
-                    </select>
-                </label>
-                <input type="number" name="score" placeholder="score" />
-                <input type="text" name="entry" placeholder="food entry" /> */}
                 <input type="submit" value="submit" />
             </form>
         </div>
