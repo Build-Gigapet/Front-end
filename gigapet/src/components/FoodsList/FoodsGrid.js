@@ -13,11 +13,7 @@ const FoodList = props => {
   useEffect(() => {
     const getFoods = () => {
       axiosWithAuth()
-        .get("https://build-gigapet.herokuapp.com/api/food", {
-          params: {
-            token: token,
-          },
-        })
+        .get("https://build-gigapet.herokuapp.com/api/food")
         .then(response => {
           console.log("Response: ", response);
 

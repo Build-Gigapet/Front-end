@@ -10,18 +10,20 @@ import Dashboard from "../components/Dashboard";
 
 const Header = function(props) {
   const logout = () => {
-    localStorage.setItem("ID", -1);
-    localStorage.setItem("name", undefined);
-    localStorage.setItem("token", undefined);
+    localStorage.clear();
+    // localStorage.setItem("ID", -1);
+    // localStorage.setItem("name", undefined);
+    // localStorage.setItem("token", undefined);
   };
 
   useEffect(() => {
-    if (localStorage.getItem("ID") !== -1) {
+    if (localStorage.getItem("ID") != undefined) {
       // console.log(localStorage.getItem("name"));
+      console.log("asdklfjdasfl: " + localStorage.getItem("ID"));
       document.getElementById("login-button").href = "/login";
-      // document.getElementById("login-button").innerHTML = localStorage.getItem(
-      // "name",
-      // );
+      document.getElementById("login-button").innerHTML = localStorage.getItem(
+        "name",
+      );
       document.getElementById("register-button").style.display = "none";
     }
   });
@@ -42,7 +44,12 @@ const Header = function(props) {
           <a id="login-button" href="/login">
             Log In
           </a>
-          <a href="/" onClick={logout()}>
+          <a
+            href="/"
+            onClick={() => {
+              this.logout();
+            }}
+          >
             Logout
           </a>
         </nav>
