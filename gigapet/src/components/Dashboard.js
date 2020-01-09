@@ -23,15 +23,6 @@ const Dashboard = props => {
 
   return (
     <div className="dash-board">
-      <header>
-        <nav>
-          <a href="" target="_blank" alt="Click to visit the homepage">
-            Home
-          </a>
-
-          <Link to="/login">Log Out</Link>
-        </nav>
-      </header>
       <main>
         <div>
           <h2>Food Section</h2>

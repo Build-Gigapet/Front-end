@@ -14,10 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 
 const Header = function (props) {
   useEffect(() => {
-    //   // Update the document title using the browser API
-    //   // document.title = `You clicked ${count} times`;
-    if (localStorage.getItem("ID") !== -1) {
-      console.log(localStorage.getItem("name"));
+    if (localStorage.getItem("ID") != undefined) {
       document.getElementById("login-button").href = "/dashboard";
       document.getElementById("login-button").innerHTML = localStorage.getItem(
         "name",
@@ -27,9 +24,7 @@ const Header = function (props) {
   }, []);
 
   const logout = () => {
-    localStorage.setItem("ID", -1);
-    localStorage.setItem("name", undefined);
-    localStorage.setItem("token", undefined);
+    localStorage.clear();
   };
 
   return (
@@ -54,11 +49,11 @@ const Header = function (props) {
           <Switch>
             <PrivateRoute path="/protected" component={Parent} />
             <Route exact path="/protected" component={Parent} />
-            <Route path='/dashboard' component={Dashboard} />
+            {/* <Route path='/dashboard' component={Dashboard} />
             <Route path='/parent' component={Parent} />
             {/* <Route path='/update' component={UpdateForm} /> */}
             <Route path='/login' component={Login} />
-            <Route path='/sign-up' component={SignUp} />
+            <Route path='/sign-up' component={SignUp} /> */}
           </Switch>
           {/* <a href="/dashboard">Dashboard</a> */}
           <a id="register-button" href="/register">
