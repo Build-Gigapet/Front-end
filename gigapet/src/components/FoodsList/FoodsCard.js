@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Button, CardTitle, CardText, Row, Col } from "reactstrap";
+import FoodsGrid from "./FoodsGrid";
 
-export default function FoodCard(props) {
-  // console.log("Props On CharacterCard ", props);
-
+export default function FoodsCard(props) {
   return (
     <Row>
       <Col sm="6">
         <Card body>
-          <CardTitle>{props.food_name}</CardTitle>
-          <CardText>{props.food_type}</CardText>
+          <CardTitle>{props.name}</CardTitle>
+          <CardText>{props.type}</CardText>
         </Card>
       </Col>
     </Row>
