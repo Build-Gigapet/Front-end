@@ -13,9 +13,9 @@ const SignUp = props => {
     // Update the document title using the browser API
     // document.title = `You clicked ${count} times`;
     if (localStorage.getItem("ID") !== -1) {
-      window.location = "/dashboard";
+      // window.location = "/dashboard";
     }
-  });
+  }, []);
 
   const handleChange = e => {
     setSignup({
@@ -25,13 +25,14 @@ const SignUp = props => {
   };
   const onSubmit = e => {
     e.preventDefault();
+    console.log(signup);
     axiosWithAuth()
       .post("https://build-gigapet.herokuapp.com/api/auth/register", signup)
       .then(res => {
         console.log(res);
         localStorage.setItem("token", res.data.token);
         // this.props.history.push("/login");
-        window.location = "/login";
+        window.location = "/dashboard";
       })
       .catch(err => console.log(err));
   };
@@ -83,7 +84,7 @@ const SignUp = props => {
               onChange={handleChange}
             />
           </FormGroup>
-          <Button color="success">Sign Up</Button>
+          <Button type="submit" color="success">Sign Up</Button>
           {signup.isFetching && "signing up"}
         </Form>
       </div>

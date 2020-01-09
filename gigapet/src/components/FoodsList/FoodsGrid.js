@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import FoodCard from "./CharacterCard";
+import FoodCard from "./FoodsCard";
+import axiosWithAuth from "../../axiosWithAuth";
 
 const FoodList = props => {
   // set the state for the data
@@ -10,7 +11,7 @@ const FoodList = props => {
 
   useEffect(() => {
     const getFoods = () => {
-      Axios.get("https://build-gigapet.herokuapp.com/api/food")
+      axiosWithAuth().get("https://build-gigapet.herokuapp.com/api/food")
         .then(response => {
           // console.log("Response: ", response);
 
@@ -33,7 +34,7 @@ const FoodList = props => {
 
   // change our query state based on form input
   const handleInputChange = event => {
-    setQuery(event.target.value);
+    setQuery({ [event.target.name]: event.target.value });
     // console.log("SearchForm: ", query);
   };
 
@@ -44,6 +45,7 @@ const FoodList = props => {
           type="text"
           onChange={handleInputChange}
           value={query}
+          name="name"
           tabIndex="0"
           className="prompt searchName"
           placeholder="Search By Name"

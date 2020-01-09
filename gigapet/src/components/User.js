@@ -1,49 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosWithAuth from '../axiosWithAuth';
+import UserForm from "./UpdateForm";
 
 const User = () => {
     const [users, setUsers] = useState([]);
     const addUser = user => {
         setUsers([...users, user]);
     };
-    const getUser = () => {
-        axiosWithAuth().get('https://build-gigapet.herokuapp.com/api/auth/:id')
-            .then(res => {
-                console.log(res.data)
-                setUsers({ users: res.data })
+    useEffect(() => {
+        axiosWithAuth().get('https://build-gigapet.herokuapp.com/api/auth/users')
+            .then(results => {
+                console.log(results.data)
+                setUsers(results.data)
             })
             .catch(err => console.log(err));
-    }
-
+    }, [])
+    const updateUsers = user => {
+        console.log(user);
+        setUsers({ users: [users, user] });
+    };
     console.log(users);
+    if (users.length > 0) {
 
-    return (
-        <div>
 
-            <p>users</p>
+        return (
             <div>
-                <ul>
-                    {users.map(user => (
-                        <div key={user.id}>
-                            <h2 className="name">{user.name}</h2>
-                            ))}
-                    <li>{users.email}</li>
 
-
-                </ul>
-            </div>
+                <p>users</p>
                 <div>
-                    <h3>{users.name}</h3>
-                    <h3>{users.email}</h3>
+
+                    {users.map(user => {
+                        return (
+                            <div><h3>{user.name}</h3>
+                                <h3>{user.email}</h3></div>
+                        )
+                    })}
 
                 </div>
             </div>
-            )
-        }
-        export default User;
-        
-        
-        
+        )
+    } else {
+        return <h1>Loading users...</h1>
+    }
+}
+export default User;
+
+
+
         // import React from 'react';
 // import {Link} from "react-router-dom";
 // const initialUser = {

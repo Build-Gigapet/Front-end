@@ -14,7 +14,7 @@ const Login = props => {
     if (localStorage.getItem("ID") !== -1) {
       window.location = "/dashboard";
     }
-  });
+  }, []);
 
   const handleChange = e => {
     setLogin({

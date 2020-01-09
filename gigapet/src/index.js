@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import "./pages/styles/global.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as serviceWorker from "./serviceWorker";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, BrowserRouter as Router, NavLink } from "react-router-dom";
 // import App from "./App";
 import Parent from "./components/Parent";
 import PrivateRoute from "./components/PrivateRoute";
@@ -20,10 +20,13 @@ const routing = (
       <Header />
       {/* TODO: Replace APP with HOME/Marketing */}
       {/* <Route exact path="/" component={App} /> */}
-      <Route path="/sign-up" component={SignUp} />
+
+
       <Route path="/login" component={Login} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/parent" component={Parent} />
+
+
     </div>
   </Router>
 );
