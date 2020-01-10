@@ -3,11 +3,11 @@ import axiosWithAuth from "../axiosWithAuth";
 import { CardBody } from "reactstrap";
 const initialUser = {
 
-    id: 144,
-    name: "newName",
-    email: "newName@gmail.com"
+
+    name: "",
+    email: ""
 };
-const UpdateForm = (props, users) => {
+const UpdateForm = (props, users, id) => {
 
     const [editing, setEditing] = useState(false);
     const [user, setUser] = useState(initialUser);
@@ -22,14 +22,14 @@ const UpdateForm = (props, users) => {
     const handleSubmit = e => {
         e.preventDefault();
         axiosWithAuth()
-            .put(`https://build-gigapet.herokuapp.com/api/auth/:id`, {
-                name: 'newName',
-                email: 'newName@gmail.com'
+            .put(`https://build-gigapet.herokuapp.com/api/auth/${id}`, {
+                name: "newName",
+                email: "newName@gmail.com"
             })
 
             .then(results => {
                 // console.log(user)
-                setUser(props.users.map(user => {
+                props.updateUsers(props.users.map(user => {
                     if (user.id === user.name) {
                         return user = results.data
                     } else {
@@ -45,15 +45,13 @@ const UpdateForm = (props, users) => {
 
     const deleteUser = id => {
 
-        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/:id`, { user: id })
+        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/2`)
             .then(deleted => {
-                if (deleted) {
-                    console.log(deleted)
-                } else {
-                    console.log('error')
-                    // setUser(users.filter(user => {
-                    //     return user.id !== id;}))
-                }
+                // this.setState(users.filter(user => {
+                if (deleted == id) {
+                    return user;
+                };
+                // }))
                 window.location = ('/dashboard');
                 // props.history.push('/dashboard');
             })
@@ -65,10 +63,10 @@ const UpdateForm = (props, users) => {
         <div>
             <form onSubmit={handleSubmit}>
                 <h3>Edit  name and email here</h3>
-                <input type="text" name="name" value={users.name} onChange={(e) => setUser({ [e.target.name]: e.target.value })} placeholder="name" />
-                <input type="email" name="email" value={users.email} onChange={(e) => setUser({ [e.target.name]: e.target.value })} placeholder="email" />
+                <input type="text" name="name" value={users.name} onChange={handleChange} placeholder="name" />
+                <input type="email" name="email" value={users.email} onChange={handleChange} placeholder="email" />
                 {/* <input type="text" name="id" onChange={handleChange} /> */}
-                <button type="submit" onClick={() => setEditing(false)}>EDIT</button>
+                <button type="submit" onClick={() => setEditing(true)}>EDIT</button>
                 <button className="md-button" onClick={deleteUser}>DELETE</button>
 
                 <input type="submit" value="submit" />

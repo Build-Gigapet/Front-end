@@ -8,7 +8,7 @@ import FoodsGrid from "./FoodsList/FoodsGrid";
 import User from "./User";
 import "../pages/styles/global.css";
 import KidsList from './KidsList';
-import User from "./User";
+
 
 
 const Dashboard = props => {

@@ -4,7 +4,7 @@ import UpdateForm from './UpdateForm';
 import FoodsUpdateForm from "./FoodsUpdateForm";
 
 const initialKid = {
-    id: new Date(),
+
     kid_name: "",
     age: "",
     pet_name: "",
@@ -36,7 +36,7 @@ const Parent = props => {
     const editKid = (e, id) => {
         e.preventDefault();
         axiosWithAuth()
-            .put(`https://build-gigapet.herokuapp.com/api/kid/:id`, kid)
+            .put(`https://build-gigapet.herokuapp.com/api/kid/${id}`, kid)
             .then(results => {
                 setKid(kid.map(kid => {
                     if (kid.id !== id) {
@@ -57,7 +57,9 @@ const Parent = props => {
             .then(res => {
                 console.log(kid.results)
                 this.setState(kid.filter(kid => {
-                    return kid.id !== id;
+                    if (kid.id !== id) {
+                        return kid;
+                    };
                 }))
 
             })
@@ -69,7 +71,7 @@ const Parent = props => {
         event.preventDefault();
         console.log(kid)
         axiosWithAuth()
-            .post(`https://build-gigapet.herokuapp.com/api/kid/3`, kid)
+            .post(`https://build-gigapet.herokuapp.com/api/kid/${kid.id}`, kid)
             .then(result => {
                 localStorage.setItem({ kid: result.data });
                 window.location('/');
@@ -92,10 +94,12 @@ const Parent = props => {
                 <input type="number" name="age" placeholder="age" value={kid.age} onChange={handleChange} />
                 <input type="text" name="pet_name" placeholder="pet name" value={kid.pet_name} onChange={handleChange} />
                 <input type="number" name="score" placeholder="Score" value={kid.score} onChange={handleChange} />
-                <input type="number" name="height" placeholder="height" value={kid.height} onChange={handleChange} />
+                <input type="text" name="height" placeholder="height" value={kid.height} onChange={handleChange} />
                 <input type="text" name="fav_food" placeholder="favorite food" value={kid.fav_food} onChange={handleChange} />
                 <input type="text" name="weight" placeholder="weight" value={kid.weight} onChange={handleChange} />
                 <button type="submit">Add Child </button>
+                <button type="submit" onClick={editKid}>Edit Child</button>
+                <button type="submit" onClick={deleteKid}>Delete</button>
                 <UpdateForm /><br />
                 <FoodsUpdateForm />
 
