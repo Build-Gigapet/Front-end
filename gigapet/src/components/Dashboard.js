@@ -7,6 +7,9 @@ import FoodsCard from "./FoodsList/FoodsCard";
 import FoodsGrid from "./FoodsList/FoodsGrid";
 import User from "./User";
 import "../pages/styles/global.css";
+import KidsList from './KidsList';
+import User from "./User"
+
 
 const Dashboard = props => {
   // const [children, setChildren] = useState([]);
@@ -29,6 +32,7 @@ const Dashboard = props => {
           <FoodsGrid />
 
           <h2> Child Section</h2>
+          <KidsList />
           <p>User Info</p>
           <User />
 
