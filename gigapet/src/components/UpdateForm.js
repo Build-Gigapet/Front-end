@@ -30,7 +30,7 @@ const UpdateForm = (props, users) => {
             .then(results => {
                 // console.log(user)
                 setUser(props.users.map(user => {
-                    if (user.name === user.name) {
+                    if (user.id === user.name) {
                         return user = results.data
                     } else {
                         return user
@@ -65,8 +65,8 @@ const UpdateForm = (props, users) => {
         <div>
             <form onSubmit={handleSubmit}>
                 <h3>Edit  name and email here</h3>
-                <input type="text" name="name" value={users.name} onChange={(e) => setEditing({ [e.target.name]: e.target.value })} placeholder="name" />
-                <input type="email" name="email" value={users.email} onChange={(e) => setEditing({ [e.target.name]: e.target.value })} placeholder="email" />
+                <input type="text" name="name" value={users.name} onChange={(e) => setUser({ [e.target.name]: e.target.value })} placeholder="name" />
+                <input type="email" name="email" value={users.email} onChange={(e) => setUser({ [e.target.name]: e.target.value })} placeholder="email" />
                 {/* <input type="text" name="id" onChange={handleChange} /> */}
                 <button type="submit" onClick={() => setEditing(false)}>EDIT</button>
                 <button className="md-button" onClick={deleteUser}>DELETE</button>
