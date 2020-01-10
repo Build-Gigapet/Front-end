@@ -1,39 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import axiosWithAuth from '../axiosWithAuth';
+import React, { useState, useEffect } from "react";
+import axiosWithAuth from "../axiosWithAuth";
 import UserForm from "./UpdateForm";
 import UserCard from './UserCard';
 
 const User = () => {
-    const [users, setUsers] = useState([]);
-    const addUser = user => {
-        setUsers([...users, user]);
-    };
-    useEffect(() => {
-        axiosWithAuth().get('https://build-gigapet.herokuapp.com/api/auth/users')
-            .then(results => {
-                console.log(results.data)
-                setUsers(results.data)
-            })
-            .catch(err => console.log(err));
-    }, [])
-    const updateUsers = user => {
-        console.log(user);
-        setUsers({ users: [users, user] });
-    };
-
-
+  const [users, setUsers] = useState([]);
+  const addUser = user => {
+    setUsers([...users, user]);
+  };
+  useEffect(() => {
+    axiosWithAuth()
+      .get("https://build-gigapet.herokuapp.com/api/auth/users")
+      .then(results => {
+        // console.log(results.data)
+        setUsers(results.data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+  const updateUsers = user => {
+    // console.log(user);
+    setUsers({ users: [users, user] });
+  };
+  // console.log(users);
+  if (users.length > 0) {
     return (
-        <>
-            <UserCard users={users} updateUsers={setUsers} />
-        </>
+      <div>
+        <p>users</p>
+        <div>
+          {users.map(user => {
+            return (
+              <div>
+                <h3>{user.name}</h3>
+                <h3>{user.email}</h3>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     );
-}
-
+  } else {
+    return <h1>Loading users...</h1>;
+  }
+};
 export default User;
 
-
-
-        // import React from 'react';
+// import React from 'react';
 // import {Link} from "react-router-dom";
 // const initialUser = {
 
@@ -44,8 +55,6 @@ export default User;
 // const Dashboard = props => {
 //     const [users, setUsers] = useState(initialUser);
 
-
-
 //     axiosWithAuth().get('https://build-gigapet.herokuapp.com/api/auth/:id')
 //         .then(res => {
 //             console.log(res.data)
@@ -53,11 +62,9 @@ export default User;
 //         })
 //         .catch(err => console.log(err))
 
-
 //     const addUser = initalUser => {
 //         setUsers([...users, initialUser]);
 //     };
-
 
 //     return (
 //         <div className="dash-board">
@@ -71,7 +78,6 @@ export default User;
 //                 </ul>
 //             </nav>
 //             <main>
-
 
 //                 <div>
 //                     <p>users</p>
@@ -96,17 +102,7 @@ export default User;
 
 //                 }
 
-
-
-
 //         </div>
-
-
-
-
-
-
-
 
 //             )
 //         }

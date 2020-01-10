@@ -36,8 +36,6 @@ const Header = function (props) {
         </div>
         <nav className="navLinks">
           <a href="/home">Home</a>
-          <a href="/sign-up">SignUp</a>
-          <Link to="/login">Login</Link>
 
           <a href="/update">UpdateForm</a>
           <a href="/dashboard">Dashboard</a>

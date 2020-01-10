@@ -6,6 +6,7 @@ import UpdateForm from "./UpdateForm";
 import { Link } from "react-router-dom";
 import FoodsCard from "./FoodsList/FoodsCard";
 import FoodsGrid from "./FoodsList/FoodsGrid";
+import KidsList from './KidsList';
 import User from "./User"
 
 const Dashboard = props => {
@@ -30,6 +31,7 @@ const Dashboard = props => {
           <FoodsGrid />
 
           <h2> Child Section</h2>
+          <KidsList />
           <p>User Info</p>
           <User />
 
