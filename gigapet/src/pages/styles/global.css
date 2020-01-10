@@ -12,3 +12,22 @@ body,
   height: 100%;
   min-height: 100%;
 }
+
+.foodsContainer {
+  padding-bottom: 20px;
+}
+
+.foodsSearch {
+  margin-left: 30px;
+  padding-bottom: 20px;
+}
+
+.foodsHeader {
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.foods {
+  border-bottom: 2px solid black;
+}

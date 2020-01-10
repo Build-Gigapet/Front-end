@@ -1,4 +1,3 @@
-
 import React from "react";
 import axiosWithAuth from "../axiosWithAuth";
 
@@ -6,7 +5,8 @@ import UpdateForm from "./UpdateForm";
 import { Link } from "react-router-dom";
 import FoodsCard from "./FoodsList/FoodsCard";
 import FoodsGrid from "./FoodsList/FoodsGrid";
-import User from "./User"
+import User from "./User";
+import "../pages/styles/global.css";
 
 const Dashboard = props => {
   // const [children, setChildren] = useState([]);
@@ -25,8 +25,7 @@ const Dashboard = props => {
     <div className="dash-board">
       <main>
         <div>
-          <h2>Food Section</h2>
-          <FoodsCard />
+          <h2 className="foodsHeader">Food Section</h2>
           <FoodsGrid />
 
           <h2> Child Section</h2>
@@ -50,4 +49,3 @@ const Dashboard = props => {
   );
 };
 export default Dashboard;
-
