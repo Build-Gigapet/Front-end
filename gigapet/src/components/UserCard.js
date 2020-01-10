@@ -6,7 +6,7 @@ const initialUser = {
     name: "",
     email: ""
 };
-const UserCard = props => {
+const UserCard = (props, users, updateUsers) => {
 
     const [editing, setEditing] = useState(false);
     const [user, setUser] = useState(initialUser);
@@ -47,7 +47,7 @@ const UserCard = props => {
             .catch(err => console.log(err));
     };
     console.log(user);
-    if (props.users.length > 0) {
+    if (users.length > 0) {
         return (
             <div>
 
@@ -66,7 +66,7 @@ const UserCard = props => {
                 </div>
 
                 <div>
-                    {editing && (<form onSubmit={saveEdit}><lengend>edit user</lengend><label>name:<input onChange={e => setUser({ ...user, user: e.target.value })} value={user.name} /></label><label>email:<input onChange={e => setUser({ ...user, email: e.target.value })} value={user.email} /></label><div className="button-row"><button onClick={() => editUser(user)}>Edit</button>
+                    {editing && (<form onSubmit={saveEdit}><legend>edit user</legend><label>name:<input onChange={e => setUser({ ...user, user: e.target.value })} value={user.name} /></label><label>email:<input onChange={e => setUser({ ...user, email: e.target.value })} value={user.email} /></label><div className="button-row"><button onClick={() => editUser(user)}>Edit</button>
                         <button onClick={() => setEditing(false)}>cancel</button>
                         <button onClick={() => deleteUser(user.id)}>Delete</button></div></form>)}
 

@@ -32,7 +32,7 @@ const Dashboard = props => {
 
                     <h2> Child Section</h2>
                     <KidsList />
-                    <p>User Info</p>
+                    <h2>User Info</h2>
                     <User />
 
                     {/* {children && children.map(child => {
