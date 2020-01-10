@@ -36,7 +36,7 @@ const Header = function (props) {
         </div>
         <nav className="navLinks">
           <a href="/home">Home</a>
-
+          <Link to="/sign-up">SignUp</Link>
           <a href="/update">UpdateForm</a>
           <a href="/dashboard">Dashboard</a>
           {/* 
@@ -53,7 +53,7 @@ const Header = function (props) {
             <Route path='/update' component={UpdateForm} />
 
             <Route path='/login' component={Login} />
-            <Route path='/sign-up' component={SignUp} /> */}
+            <Route path='/sign-up' component={SignUp} />
           </Switch>
           {/* <a href="/dashboard">Dashboard</a> */}
           <a id="register-button" href="/register">
