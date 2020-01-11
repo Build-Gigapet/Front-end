@@ -1,61 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../axiosWithAuth";
-const initialUser = {
+import { CardBody } from "reactstrap";
 
-    id: new Date(),
-    name: "",
-    email: ""
-};
-const UpdateForm = (props, user) => {
+const UpdateForm = (props, users, id) => {
 
     const [editing, setEditing] = useState(false);
-    const [userToEdit, setUserToEdit] = useState(initialUser);
+    const [user, setUser] = useState({
+        name: "",
+        email: ""
+    });
 
     const editUser = user => {
         setEditing(true);
-        setUserToEdit(user);
+        setUser(user);
     }
 
     const saveEdit = e => {
         e.preventDefault();
         axiosWithAuth()
-            .put(`https://build-gigapet.herokuapp.com/api/auth/${userToEdit.id}`, userToEdit)
+            .put(`https://build-gigapet.herokuapp.com/api/auth/1`, {
+                name: "newName",
+                email: "newName@gmail.com"
+
+            })
+
             .then(results => {
-                setUserToEdit(props.users.map(user => {
-                    if (userToEdit.id === user.id) {
-                        return user = results.data
-                    } else {
-                        return user
+                console.log(user)
+                props.updateUsers(users.map(user => {
+                    if (user.name === user.id) {
+                        return user = results
+
                     }
 
                 }))
-                window.location = ("/");
+                window.location = ("/dashboard");
+                // props.history.push('/')
+                setUser(user.name)
             })
             .catch(err => console.log(err.response));
     };
-
+    const handleChange = event => {
+        setEditing({ id: event.target.value });
+    }
     const deleteUser = id => {
 
-        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/${id}`)
-            .then(results => {
-                console.log(results.data)
-                setUserToEdit(props.users.filter(user => {
-                    return user.id !== id;
-                }))
-                props.history.push('/protected');
+        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/8`)
+            .then(deleted => {
+                // this.setState(users.filter(user => {
+                if (deleted == id) {
+                    return user;
+                };
+                // }))
+                window.location = ('/dashboard');
+                // props.history.push('/dashboard');
             })
             .catch(err => console.log(err));
     };
 
 
-
     return (
         <div>
-            <form>
+            <form onSubmit={saveEdit}>
                 <h3>Edit  name and email here</h3>
-                <input type="text" name="name" placeholder="name" />
-                <input type="email" name="email" placeholder="email" />
-                <button onClick={editUser}>EDIT</button>
+                <input type="text" name="name" value={users.name} onChange={handleChange} placeholder="name" />
+                <input type="email" name="email" value={users.email} onChange={handleChange} placeholder="email" />
+                {/* <input type="text" name="id" onChange={handleChange} /> */}
+                <button type="submit" onClick={() => setEditing(true)}>EDIT</button>
                 <button className="md-button" onClick={deleteUser}>DELETE</button>
 
                 <input type="submit" value="submit" />

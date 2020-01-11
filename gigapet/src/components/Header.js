@@ -36,11 +36,11 @@ const Header = function (props) {
         </div>
         <nav className="navLinks">
           <a href="/home">Home</a>
-
-
-          <a href="/dashboard">Dashboard</a>
-
+          <Link to="/sign-up">SignUp</Link>
           <a href="/update">UpdateForm</a>
+          <a href="/dashboard">Dashboard</a>
+          {/* 
+          <a href="/update">UpdateForm</a> */}
           <a href="/parent">Parent</a>
 
 
@@ -49,9 +49,11 @@ const Header = function (props) {
             <Route exact path="/protected" component={Parent} />
             {/* <Route path='/dashboard' component={Dashboard} />
             <Route path='/parent' component={Parent} />
+            {/* <Route path='/update' component={UpdateForm} /> */}
             <Route path='/update' component={UpdateForm} />
+
             <Route path='/login' component={Login} />
-            <Route path='/sign-up' component={SignUp} /> */}
+            <Route path='/sign-up' component={SignUp} />
           </Switch>
           {/* <a href="/dashboard">Dashboard</a> */}
           <a id="register-button" href="/register">

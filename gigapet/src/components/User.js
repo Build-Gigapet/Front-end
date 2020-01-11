@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 import UserForm from "./UpdateForm";
+import UserCard from './UserCard';
+import UpdateForm from "./UpdateForm";
 
 const User = () => {
   const [users, setUsers] = useState([]);
@@ -20,7 +22,8 @@ const User = () => {
     // console.log(user);
     setUsers({ users: [users, user] });
   };
-  // console.log(users);
+
+  console.log(users);
   if (users.length > 0) {
     return (
       <div>
@@ -28,9 +31,11 @@ const User = () => {
         <div>
           {users.map(user => {
             return (
-              <div>
+              <div key={user.id}>
                 <h3>{user.name}</h3>
                 <h3>{user.email}</h3>
+                <UpdateForm user={user} users={users} updateUsers={setUsers} />
+
               </div>
             );
           })}
@@ -39,7 +44,13 @@ const User = () => {
     );
   } else {
     return <h1>Loading users...</h1>;
+
   }
+  return (
+    <div>    <UpdateForm users={users} updateUsers={setUsers} />
+    </div>
+  )
+
 };
 export default User;
 
