@@ -34,6 +34,7 @@ const User = () => {
               <div key={user.id}>
                 <h3>{user.name}</h3>
                 <h3>{user.email}</h3>
+                <UpdateForm user={user} users={users} updateUsers={setUsers} />
 
               </div>
             );

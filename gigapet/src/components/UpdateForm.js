@@ -1,51 +1,50 @@
 import React, { useState, useEffect } from "react";
 import axiosWithAuth from "../axiosWithAuth";
 import { CardBody } from "reactstrap";
-const initialUser = {
 
-
-    name: "",
-    email: ""
-};
 const UpdateForm = (props, users, id) => {
 
     const [editing, setEditing] = useState(false);
-    const [user, setUser] = useState(initialUser);
+    const [user, setUser] = useState({
+        name: "",
+        email: ""
+    });
 
     const editUser = user => {
         setEditing(true);
         setUser(user);
     }
-    const handleChange = event => {
-        setEditing({ id: event.target.value });
-    }
-    const handleSubmit = e => {
+
+    const saveEdit = e => {
         e.preventDefault();
         axiosWithAuth()
-            .put(`https://build-gigapet.herokuapp.com/api/auth/${id}`, {
+            .put(`https://build-gigapet.herokuapp.com/api/auth/1`, {
                 name: "newName",
                 email: "newName@gmail.com"
+
             })
 
             .then(results => {
-                // console.log(user)
-                props.updateUsers(props.users.map(user => {
-                    if (user.id === user.name) {
-                        return user = results.data
-                    } else {
-                        return user
+                console.log(user)
+                props.updateUsers(users.map(user => {
+                    if (user.name === user.id) {
+                        return user = results
+
                     }
 
                 }))
-                window.location = ("/");
+                window.location = ("/dashboard");
                 // props.history.push('/')
+                setUser(user.name)
             })
             .catch(err => console.log(err.response));
     };
-
+    const handleChange = event => {
+        setEditing({ id: event.target.value });
+    }
     const deleteUser = id => {
 
-        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/2`)
+        axiosWithAuth().delete(`https://build-gigapet.herokuapp.com/api/auth/8`)
             .then(deleted => {
                 // this.setState(users.filter(user => {
                 if (deleted == id) {
@@ -61,7 +60,7 @@ const UpdateForm = (props, users, id) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={saveEdit}>
                 <h3>Edit  name and email here</h3>
                 <input type="text" name="name" value={users.name} onChange={handleChange} placeholder="name" />
                 <input type="email" name="email" value={users.email} onChange={handleChange} placeholder="email" />

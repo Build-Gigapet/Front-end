@@ -36,6 +36,7 @@ const Dashboard = props => {
                     <h2>User Info</h2>
                     <User />
 
+
                     {/* {children && children.map(child => {
                     return (
                         // <img src=""/>
